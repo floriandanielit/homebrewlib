@@ -2,34 +2,30 @@ var homebrewlib = (function () {
 
 //// private variable declarations
 
-  const myGrades = [93, 95, 88, 0, 55, 91];
+  // amount of water (liters) absorbed by by 1 kg of grain (emprical value)
+  var grain_absorption = 1.0;
 
 
 //// private function declarations
 
-  var average = function () {
-    var total = myGrades.reduce(function (accumulator, item) {
-      return accumulator + item;
-    }, 0);
-
-    return 'Your average grade is ' + total / myGrades.length + '.';
+  // transforms temperature from Celsius to Fahrenheit
+  var celsius_to_fahrenheit = function (temp) {
+    return temp * 9/5 + 32;
   };
 
-
-  var failing = function (level=90) {
-    var failingGrades = myGrades.filter (function(item) {
-        return item < level;
-      });
-
-    return 'You failed ' + failingGrades.length + ' times.';
+  // transforms temperature from Fahrenheit to Celsius
+  var fahrenheit_to_celsius = function (temp) {
+    return (temp - 32) * 5/9;
   };
+
 
 
 //// Reveal pointers to the private functions to be revealed publicly
 
   return {
-    average: average,
-    failing: failing
+    grain_absorption: grain_absorption,
+    celsius_to_fahrenheit: celsius_to_fahrenheit,
+    fahrenheit_to_celsius: fahrenheit_to_celsius
   }
 
 })();
