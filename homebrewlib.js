@@ -2,8 +2,8 @@ var homebrewlib = (function () {
 
 //// private variable declarations
 
-  // amount of water (liters) absorbed by by 1 kg of grain (emprical value)
-  // source:
+  // amount of water (liters) absorbed by 1 kg of grain (average, emprical value)
+  // source: https://byo.com/bock/item/410-calculating-water-usage-advanced-brewing
   var grain_absorption = 1.0;
 
 
