@@ -1,0 +1,30 @@
+{
+  "name": "homebrewlib",
+  "version": "0.1.0",
+  "description": "A JavaScript library for homebrew recipe calculations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/floriandanielit/homebrewlib.git"
+  },
+  "keywords": [
+    "homebrewing",
+    "recipe",
+    "calculation",
+    "mashing",
+    "boiling",
+    "fermentation",
+    "hops",
+    "malts",
+    "yeast"
+  ],
+  "author": "Florian Daniel <mail@floriandaniel.it> (http://floriandaniel.it)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/floriandanielit/homebrewlib/issues"
+  },
+  "homepage": "https://github.com/floriandanielit/homebrewlib#readme"
+}
