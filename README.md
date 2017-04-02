@@ -21,10 +21,17 @@ console.log(homebrewlib.c2f(0)); // transforms Celsius into Fahrenheit
 
 ## Installation
 Include the minified version of the library (`homebrewlib.min.js`) you can
-find in the subfolder `browser/` of module:
+find in the subfolder `browser` of this module if you want to use a **local
+copy** of the library:
 ```
 <script src="homebrewlib.min.js"></script>
 ```
+Alternatively, you can also include the library fetching the **latest version** 
+of if from this repository:
+```
+<script src="https://github.com/floriandanielit/homebrewlib/blob/master/browser/homebrewlib.min.js"></script>
+```
+
 
 ## Usage
 Once the JavaScript file has been loaded, homebrewlib is globally accessible
