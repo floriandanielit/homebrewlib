@@ -81,6 +81,7 @@ get_IBU = function (aa, weight, minutes, volume, sg, type, after_hot_break) {
 
 
 
+
 function Recipe() {
 
 //// variable declarations
@@ -149,7 +150,8 @@ function Recipe() {
         {name : 'EKG', type : 'Pellet', weight : 55, aa : 5.9, time : 60, after_hot_break : true},
         {name : 'EKG', type : 'Pellet', weight : 25, aa : 5.9, time : 30, after_hot_break : true},
         {name : 'EKG', type : 'Pellet', weight : 20, aa : 5.9, time :  1, after_hot_break : true},
-      ]
+      ],
+      water_addition : 0
     },
 
     whirlpool : {
@@ -192,6 +194,23 @@ function Recipe() {
 
 //// brewing functions
 
+  // dilutes wort with water
+  this.dilute = function (water_addition) {
+
+    var wort = this.state[this.state.length - 1];
+
+    var dilution_factor = wort.vol / (wort.vol + water_addition);
+
+    wort.og = 1 + (wort.og - 1) * dilution_factor;
+    wort.fg = 1 + (wort.fg - 1) * dilution_factor;
+    wort.abv *= dilution_factor;
+    wort.ebc *= dilution_factor;
+    wort.ibu *= dilution_factor;
+    wort.co2 *= dilution_factor;
+    wort.vol += water_addition;
+  }
+
+
   // calculates the properties of the wort in the mash tun, before lautering
   // source: https://byo.com/hops/item/761-hitting-target-original-gravity-and-volume-advanced-homebrewing
   this.mash = function () {
@@ -232,31 +251,39 @@ function Recipe() {
     return this;
   };
 
-
+  // boil wort
+  // supported ingredients: hops, water additions
   this.boil = function () {
 
     var wort = this.state[this.state.length - 1];
     var boil = this.process.boil;
 
-    // 75 to be substituted with real value!!!
+    // todo: calculare boil-off using boiling power not %
+    // change of volume due to evaporation
     var post_boil_volume = wort.vol * (1 - this.equipment.boil_evaporation_rate * boil.time/60);
+
+    // specific gravity at end of boil
     var sg = 1 + (wort.og - 1) * wort.vol/post_boil_volume;
 
-    var ibu = 0;
+    // IBUs at end of boil
+    var ibu = wort.ibu;
     for (let hop of boil.hops)
       ibu += get_IBU (hop.aa, hop.weight, hop.time, post_boil_volume,
-              (wort.og + sg)/2.0,  hop.type, hop.after_hot_break);
+              (wort.og + sg)/2.0, hop.type, hop.after_hot_break);
 
     this.state.push ({
       name : 'Post-boil wort',
-      vol  : post_boil_volume - this.equipment.boil_loss,
+      vol  : post_boil_volume + boil.water_addition - this.equipment.boil_loss,
       og   : sg,
       fg   : sg,
       abv  : wort.abv,
       ebc  : wort.ebc,
-      ibu  : wort.ibu + ibu,
+      ibu  : ibu,
       co2  : 0
     });
+
+    if (boil.water_addition)
+      dilute (boil.water_addition);
 
     return this;
   };
