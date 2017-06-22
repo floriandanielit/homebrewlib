@@ -141,6 +141,7 @@ function Recipe() {
         { name : 'Crystal', weight : 0.4, ebc  : 160 },
         { name : 'Brown Malt', weight : 0.2, ebc  : 200 }
       ],
+      mash_water: 28,
       sparge_water : 41
     },
 
@@ -151,14 +152,8 @@ function Recipe() {
         {name : 'EKG', type : 'Pellet', weight : 25, aa : 5.9, time : 30, after_hot_break : true},
         {name : 'EKG', type : 'Pellet', weight : 20, aa : 5.9, time :  1, after_hot_break : true},
       ],
-      water_addition : 0
-    },
-
-    whirlpool : {
-      hops : [
-        {name : 'EKG', type : 'Pellet', weight : 25, aa : 5.9, time : 30},
-      ],
-      time : 15
+      water_addition : 0,
+      sugar_addition : {qty : 0.500, type : 'Sucrose'}
     },
 
     ferment : {
@@ -195,7 +190,7 @@ function Recipe() {
 //// brewing functions
 
   // dilutes wort with water
-  this.dilute = function (water_addition) {
+  this.add_water = function (water_addition) {
 
     var wort = this.state[this.state.length - 1];
 
@@ -211,20 +206,52 @@ function Recipe() {
   }
 
 
+  this.add_sugar = function (quantity, type) {
+
+    var wort = this.state[this.state.length - 1];
+
+    var correction = 1.0; // correction compared to spure ucrose
+    switch (type) {
+      case 'Dextrose'            : correction = 1.0; /// TBD !!!!
+      case 'Dry malt extract'    : correction = 1.0;
+      case 'Liquid malt extract' : correction = 1.0;
+    }
+
+    var new_sugar = quantity * correction;
+    var total_sugar = wort.vol * wort.og * sg2p(wort.og)/100 + new_sugar;
+
+    var a = 258.6;
+    var b = 227.1/258.2;
+    var extract_plato = ( -(a+b*total_sugar*100/wort.vol) +
+                        Math.sqrt(Math.pow(a+b*total_sugar*100/wort.vol,2) +
+                        4*a*(1-b)*total_sugar*100/wort.vol)) / (2-2*b);
+    var sg = p2sg(extract_plato);
+
+    wort.og  = sg;
+    wort.fg  = wort.fg;  // tbd
+    wort.abv = wort.abv; // tbd
+    wort.ebc = wort.ebc; // tbd
+    wort.ibu = wort.ibu;
+    wort.co2 = wort.co2;
+    wort.vol = wort.vol;
+  }
+
+
   // calculates the properties of the wort in the mash tun, before lautering
   // source: https://byo.com/hops/item/761-hitting-target-original-gravity-and-volume-advanced-homebrewing
   this.mash = function () {
 
     var mash_water = this.state[this.state.length - 1];
+
     var ebc = 0;
     var total_grain_weigth = 0;
-
     var malts = this.process.mash.malts;
     for (var i = 0; i < malts.length; i++) {
       total_grain_weigth += malts[i].weight;
       ebc += malts[i].ebc * malts[i].weight;
     }
     ebc = ebc / total_grain_weigth + mash_water.ebc + this.constants.color_adjustment;
+
     var extract = total_grain_weigth * this.equipment.mash_efficiency_weight;
 
     var volume = mash_water.vol + this.process.mash.sparge_water - total_grain_weigth * this.constants.grain_absorption;
@@ -238,7 +265,7 @@ function Recipe() {
     var sg = p2sg(extract_plato);
 
     this.state.push ({
-      name : 'Pre-boil wort',
+      name : 'Post-mash wort',
       vol  : volume - this.equipment.mash_loss,
       og   : sg,
       fg   : sg,
@@ -267,13 +294,16 @@ function Recipe() {
 
     // IBUs at end of boil
     var ibu = wort.ibu;
-    for (let hop of boil.hops)
-      ibu += get_IBU (hop.aa, hop.weight, hop.time, post_boil_volume,
-              (wort.og + sg)/2.0, hop.type, hop.after_hot_break);
+    for (i=0; i<boil.hops.length; i++)
+      ibu += get_IBU (boil.hops[i].aa, boil.hops[i].weight, boil.hops[i].time, post_boil_volume,
+              (wort.og + sg)/2.0, boil.hops[i].type, boil.hops[i].after_hot_break);
+//              for (let hop of boil.hops)
+  //              ibu += get_IBU (hop.aa, hop.weight, hop.time, post_boil_volume,
+    //                    (wort.og + sg)/2.0, hop.type, hop.after_hot_break);
 
     this.state.push ({
       name : 'Post-boil wort',
-      vol  : post_boil_volume + boil.water_addition - this.equipment.boil_loss,
+      vol  : post_boil_volume - this.equipment.boil_loss,
       og   : sg,
       fg   : sg,
       abv  : wort.abv,
@@ -282,13 +312,13 @@ function Recipe() {
       co2  : 0
     });
 
+    // water addition during boil
     if (boil.water_addition)
-      dilute (boil.water_addition);
+      this.add_water(boil.water_addition);
 
-    return this;
-  };
-
-  this.whirlpool = function () {
+    // sugar addition during boil
+    if (boil.sugar_addition)
+      this.add_sugar(boil.sugar_addition.qty, boil.sugar_addition.type);
 
     return this;
   };
@@ -297,7 +327,7 @@ function Recipe() {
 
     var wort = this.state[this.state.length - 1];
     var original_extract = sg2p(wort.og);
-    var final_extract = original_extract * (1 -this.process.ferment.yeast.attenuation/100) ;
+    var final_extract = original_extract * (1 - this.process.ferment.yeast.attenuation/100) ;
     var fg = p2sg(final_extract);
 
     var co2 = 1.013 * Math.pow(2.71828182845904, -10.73797+2617.25/(this.process.ferment.temperature+273.15)) * 10;
@@ -306,7 +336,7 @@ function Recipe() {
     var abv = (1.05/0.79) * ((wort.og - fg) / fg) * 100;
 
     this.state.push ({
-      name : 'Young beer',
+      name : 'Fermented wort',
       vol  : wort.vol - this.equipment.fermentation_loss,
       og   : wort.og,
       fg   : fg,
@@ -316,10 +346,14 @@ function Recipe() {
       co2  : co2
     });
 
+    // take into account possible water addition during fermentation
+    if (this.process.ferment.water_addition)
+      this.add_water(this.process.ferment.water_addition);
+
     return this;
   };
 
-  this.prime = function () {
+  this.bottle = function () {
 
     var wort = this.state[this.state.length - 1];
 
@@ -348,7 +382,7 @@ function Recipe() {
 
   // shortcut function to "brew" a full recipe in one shot
   this.brew = function () {
-    return this.mash().boil().whirlpool().ferment().prime();
+    return this.mash().boil().ferment().bottle();
   }
 
   // drops the last productin step from the state of the production
@@ -417,7 +451,16 @@ module.exports = {
 
 //// basic conversion functions
 
-  c2f, f2c, sg2p, p2sg, gal2l, l2gal, oz2g, g2oz, lbs2kg, kg2lbs,
+  c2f: c2f,
+  f2c: f2c,
+  sg2p: sg2p,
+  p2sg: p2sg,
+  gal2l: gal2l,
+  l2gal: l2gal,
+  oz2g: oz2g,
+  g2oz: g2oz,
+  lbs2kg: lbs2kg,
+  kg2lbs: kg2lbs,
 
 
 /// recipe management functions
