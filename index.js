@@ -153,7 +153,7 @@ function Recipe() {
         {name : 'EKG', type : 'Pellet', weight : 20, aa : 5.9, time :  1, after_hot_break : true},
       ],
       water_addition : 0,
-      sugar_addition : {qty : 0.500, type : 'Sucrose'}
+      sugar_addition : {qty : 0.0, type : 'Sucrose'}
     },
 
     ferment : {
@@ -173,7 +173,7 @@ function Recipe() {
   // the first entry is by default the mash water
   this.state = [
     { name : 'Mash water',
-      vol  : 28,
+      vol  : this.process.mash.mash_water,
       og   : 1,
       fg   : 1,
       abv  : 0,
@@ -188,6 +188,42 @@ function Recipe() {
 
 
 //// brewing functions
+
+
+  // empties the current recipe
+  this.reset = function () {
+    this.process = {
+      mash : {
+        malts : [],
+        mash_water: 0,
+        sparge_water : 0
+      },
+      boil : {
+        time : 0,
+        hops : [],
+        water_addition : 0,
+        sugar_addition : {},
+      },
+      ferment : {
+        yeast : {},
+        temperature : 0
+      },
+      prime : {
+        sugar : 0
+      }
+    };
+    this.state = [
+      { name : 'Mash water',
+        vol  : 0,
+        og   : 1,
+        fg   : 1,
+        abv  : 0,
+        ebc  : 0,
+        ibu  : 0,
+        co2  : 0
+      }
+    ];
+  }
 
   // dilutes wort with water
   this.add_water = function (water_addition) {
@@ -317,7 +353,7 @@ function Recipe() {
       this.add_water(boil.water_addition);
 
     // sugar addition during boil
-    if (boil.sugar_addition)
+    if (boil.sugar_addition.qty)
       this.add_sugar(boil.sugar_addition.qty, boil.sugar_addition.type);
 
     return this;
@@ -327,7 +363,9 @@ function Recipe() {
 
     var wort = this.state[this.state.length - 1];
     var original_extract = sg2p(wort.og);
-    var final_extract = original_extract * (1 - this.process.ferment.yeast.attenuation/100) ;
+    var final_extract = original_extract;
+    if (this.process.ferment.yeast.attenuation)
+      final_extract -= original_extract * this.process.ferment.yeast.attenuation/100;
     var fg = p2sg(final_extract);
 
     var co2 = 1.013 * Math.pow(2.71828182845904, -10.73797+2617.25/(this.process.ferment.temperature+273.15)) * 10;
@@ -382,6 +420,8 @@ function Recipe() {
 
   // shortcut function to "brew" a full recipe in one shot
   this.brew = function () {
+    while (this.state.length > 1)
+      this.state.pop();
     return this.mash().boil().ferment().bottle();
   }
 
