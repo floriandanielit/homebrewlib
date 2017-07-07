@@ -202,13 +202,14 @@ function Recipe() {
         time : 0,
         hops : [],
         water_addition : 0,
-        sugar_addition : {},
+        sugar_addition : {qty : 0.0, type : 'Sucrose'},
       },
       ferment : {
         yeast : {},
-        temperature : 0
+        temperature : 0,
+        water_addition : 0
       },
-      prime : {
+      bottle : {
         sugar : 0
       }
     };
@@ -372,6 +373,7 @@ function Recipe() {
 
     // source: http://www.cotubrewing.com/homebrewing/alcohol-content-formula/
     var abv = (1.05/0.79) * ((wort.og - fg) / fg) * 100;
+    if (abv < 0) abv = 0;
 
     this.state.push ({
       name : 'Fermented wort',
@@ -396,13 +398,13 @@ function Recipe() {
     var wort = this.state[this.state.length - 1];
 
     var prime_co2 = 0;
-    if (this.process.prime.sugar) {
-      prime_co2 = this.process.prime.sugar * this.constants.sugar_to_CO2_conversion;
+    if (this.process.bottle.sugar) {
+      prime_co2 = this.process.bottle.sugar * this.constants.sugar_to_CO2_conversion;
     }
     // todo: add other priming methods
     // todo: add volume of possible priming solutions
 
-    var prime_abv = (this.process.prime.sugar - prime_co2) / wort.vol / 0.794 / 10;
+    var prime_abv = (this.process.bottle.sugar - prime_co2) / wort.vol / 0.794 / 10;
 
     this.state.push ({
       name : 'Beer',
