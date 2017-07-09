@@ -120,7 +120,7 @@ function Recipe() {
     sparge_max_volume : 50,
 
     boil_max_volume : 70,
-    boil_evaporation_rate : 0.133,
+    boil_evaporation_rate : 8.3,
     boil_loss : 2,
 
     whirlpool_loss : 0,
@@ -288,6 +288,7 @@ function Recipe() {
       ebc += malts[i].ebc * malts[i].weight;
     }
     ebc = ebc / total_grain_weigth + mash_water.ebc + this.constants.color_adjustment;
+    if (isNaN(ebc)) ebc = 0;
 
     var extract = total_grain_weigth * this.equipment.mash_efficiency_weight;
 
@@ -324,7 +325,7 @@ function Recipe() {
 
     // todo: calculare boil-off using boiling power not %
     // change of volume due to evaporation
-    var post_boil_volume = wort.vol * (1 - this.equipment.boil_evaporation_rate * boil.time/60);
+    var post_boil_volume = wort.vol - this.equipment.boil_evaporation_rate * boil.time/60;
 
     // specific gravity at end of boil
     var sg = 1 + (wort.og - 1) * wort.vol/post_boil_volume;
