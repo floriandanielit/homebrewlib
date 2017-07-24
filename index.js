@@ -89,14 +89,13 @@ function Recipe() {
   // contains constants needed in calculations
   this.constants = {
 
-    // amount of water (liters) absorbed by 1 kg of grain (average, emprical value)
-    // source: https://byo.com/bock/item/410-calculating-water-usage-advanced-brewing
-//    grain_absorption : 1.04,
-    grain_absorption : 1.00,
+    // Amount of water (liters) absorbed by 1 kg of grain (average, emprical value)
+    // Source: https://byo.com/bock/item/410-calculating-water-usage-advanced-brewing
+    grain_absorption : 1.04,
 
-    // volume in l occupied by 1 kg of grains
-    // source:
-    grain_volume : 0.75,
+    // Volume in l occupied by 1 kg of grains
+    // Source: https://byo.com/bock/item/410-calculating-water-usage-advanced-brewing
+    grain_volume : 0.67,
 
     // CO2 produced by fermenting sugar (percentage of weight)
     // source:
@@ -108,7 +107,9 @@ function Recipe() {
 
   };
 
-  // contains equipment settings to be overwritten with custom values
+  // The equipment settings describe the properties of the brew equipment.
+  // The proposed values refer to my own 50l brew equipment and are meant
+  // to be overwritten with custom values by the user
   this.equipment = {
 
     mash_max_volume : 50,
@@ -130,9 +131,8 @@ function Recipe() {
 
   };
 
-  // object containing the ingredients of the recipe
-  // should contain only those ingredients effectively used in the calculations
-  // (important for split recipes)
+  // The process combines in one object all the ingredients of the recipe
+  // and the configuration of the production steps (e.g., the boil time).
   this.process = {
 
     mash : {
@@ -161,25 +161,25 @@ function Recipe() {
       temperature : 20
     },
 
-    prime : {
+    bottle : {
       sugar : 250
     }
 
   };
 
-  // stores the wort properties at each stage of the production
+  // the state stores the wort properties at each stage of the production
   // (e.g., mash_water, pre_boil, post_boil)
   // the last entry in the array is the output of the last production step
   // the first entry is by default the mash water
   this.state = [
-    { name : 'Mash water',
-      vol  : this.process.mash.mash_water,
-      og   : 1,
-      fg   : 1,
-      abv  : 0,
-      ebc  : 0,
-      ibu  : 0,
-      co2  : 0
+    { name : 'Mash water',                  // meaningful name of wort state
+      vol  : this.process.mash.mash_water,  // volume of wort [l]: positive, decimal number
+      og   : 1,                             // original gravity reading [kg/l]
+      fg   : 1,                             // final gravity reading [kg/l]
+      abv  : 0,                             // alcohol by volume [%]
+      ebc  : 0,                             // wort color according to the European Brewery Convention [EBC]
+      ibu  : 0,                             // wort bitterness in International Bittering Units [IBU]
+      co2  : 0                              // CO2 dissolved in wort [g/l]
     }
   ];
 
@@ -188,7 +188,6 @@ function Recipe() {
 
 
 //// brewing functions
-
 
   // empties the current recipe
   this.reset = function () {
