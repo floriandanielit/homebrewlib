@@ -1,10 +1,10 @@
 {
   "name": "homebrewlib",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A JavaScript library for homebrew recipe calculations",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "./pack"
   },
   "repository": {
     "type": "git",
@@ -26,8 +26,5 @@
   "bugs": {
     "url": "https://github.com/floriandanielit/homebrewlib/issues"
   },
-  "homepage": "https://github.com/floriandanielit/homebrewlib#readme",
-  "scripts": {
-    "build" : "./pack"
-  }
+  "homepage": "https://github.com/floriandanielit/homebrewlib#readme"
 }
