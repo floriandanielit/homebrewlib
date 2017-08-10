@@ -23,11 +23,11 @@ console.log(homebrewlib.c2f(0)); // transforms Celsius into Fahrenheit
 
 ## Installation
 Include the minified version of the library (`homebrewlib.min.js`) you can
-find in the subfolder `browser` of this module:
+find in the subfolder `dist` of this module:
 ```
 <script src="homebrewlib.min.js"></script>
 ```
-In order to make this work, you do not need to install first the library in 
+In order to make this work, you do not need to install first the library in
 node.js. Just download the referenced `homebrewlib.min.js` and add it to the
 source files of your application.
 
@@ -38,8 +38,8 @@ will provide you access the the variable, and `homebrewlib.c2f()` will provide
 you access to the function transforming Celsius temperatures into Fahrenheit.
 
 # Generate your own browser-friendly version
-If you make changes to the node module, you may want to re-generate a 
-browser-friently version as well for your personal use. 
+If you make changes to the node module, you may want to re-generate a
+browser-friently version as well for your personal use.
 You'll need [uglifyjs](https://github.com/mishoo/UglifyJS2) and
 [browserify](http://browserify.org/). If you did not yet install them,
 do so by following the instructions you can find on their websites. Note:
@@ -50,7 +50,7 @@ Now, first **uglify** the library as follows:
 uglifyjs index.js -o ugly.js
 ```
 `ugly.js` is just a temporary name; you can use here what aver you want,
-as long as you use it also in the next instruction that you'll use to make 
+as long as you use it also in the next instruction that you'll use to make
 the library ready for your browser, that is you **browserify** it:
 ```
 browserify ugly.js --standalone homebrewlib > homebrewlib.min.js

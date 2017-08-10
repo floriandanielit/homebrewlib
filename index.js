@@ -63,6 +63,54 @@ p2sg = function (p) {
   return 1 + p / (258.6 - p/258.2*227.1);
 }
 
+// transform Brix values of non fermented wort, given the refractometer's correction factor
+// source: https://byo.com/malt/item/1313-refractometers
+obrix2sg = function (obrix, correction) {
+  var brix = obrix / correction;
+  return 1.000019 + 0.003865613*brix + 0.00001296425*brix*brix + 0.00000005701128*brix*brix*brix;  // CHECK POWERS!!!
+}
+
+// transform Brix values of fermenting/fermented wort
+// source: http://digitaleditions.walsworthprintgroup.com/publication/frame.php?i=415999&p=1&pn=&ver=html5
+fbrix2sg = function (fbrix, correction, obrix) {
+  return 1 - 0.002349*obrix/correction + 0.006276*fbrix/correction;
+}
+
+// calculate ABW from Brix readings
+// source: http://digitaleditions.walsworthprintgroup.com/publication/frame.php?i=415999&p=1&pn=&ver=html5
+get_ABW = function (obrix, fbrix, correction) {
+  return 0.67062*obrix / correction - 0.66091*fbrix/correction;
+}
+
+// calculate ABV from SG and ABW
+// source: http://digitaleditions.walsworthprintgroup.com/publication/frame.php?i=415999&p=1&pn=&ver=html5
+ABW2ABV = function (sg, abw) {
+  return sg * abw / 0.791;
+}
+
+// transformations to be checked and published
+/*      'og': function() {
+      this.obrix = ((143.254*this.og*this.og*this.og - 648.670*this.og*this.og + 1125.805*this.og - 620.389)* this.refractometer.correction).toFixed(1); // approximation to be checked
+      this.oplato = homebrewlib.sg2p(this.og).toFixed(1);
+    },
+    'oplato': function() {
+      this.og = homebrewlib.p2sg(this.oplato).toFixed(3);
+      this.obrix = ((143.254*this.og*this.og*this.og - 648.670*this.og*this.og + 1125.805*this.og - 620.389)* this.refractometer.correction).toFixed(1); // approximation to be checked
+    }, */
+/*      'fg': function() {
+      this.fbrix = ((this.fg - 1 + 0.002349*this.obrix/this.refractometer.correction) / 0.006276 * this.refractometer.correction).toFixed(1);
+      this.fplato = homebrewlib.sg2p(this.fg).toFixed(1);
+    },
+    'fplato': function() {
+      this.fg = homebrewlib.p2sg(this.fplato).toFixed(3);
+      this.fbrix = ((this.fg - 1 + 0.002349*this.obrix/this.refractometer.correction) / 0.006276 * this.refractometer.correction).toFixed(1);
+    }, */
+
+
+// calculates the fermentation attenuation from Plato readings
+get_attenuation = function (oplato, fplato) {
+  return 100 - fplato/oplato*100;
+}
 
 // calculates the IBUs for one hop addition according to Tinseth
 // source: http://realbeer.com/hops/research.html
@@ -503,6 +551,11 @@ module.exports = {
   g2oz: g2oz,
   lbs2kg: lbs2kg,
   kg2lbs: kg2lbs,
+  obrix2sg: obrix2sg,
+  fbrix2sg: fbrix2sg,
+  get_ABW: get_ABW,
+  ABW2ABV: ABW2ABV,
+  get_attenuation: get_attenuation,
 
 
 /// recipe management functions
