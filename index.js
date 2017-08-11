@@ -109,7 +109,9 @@ ABW2ABV = function (sg, abw) {
 
 // calculates the fermentation attenuation from Plato readings
 get_attenuation = function (oplato, fplato) {
-  return 100 - fplato/oplato*100;
+  if (oplato != 0)
+    return 100 - fplato/oplato*100;
+  return 0;
 }
 
 // calculates the IBUs for one hop addition according to Tinseth
