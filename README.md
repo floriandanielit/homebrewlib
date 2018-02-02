@@ -60,3 +60,20 @@ You see, `ugly.js` is the input file we want to process. The option
 global object. `homebrewlib` is the name of the object and `homebrewlib.min.js`
 the name of the JavaScript file to be created. This is the file you can include
 in your HTML code as shown above.
+
+# Testing
+Install globally mocha and mochawesome via NPM using
+
+`npm install mocha --save-dev`
+
+`npm install mochawesome --save-dev`
+
+(If `mocha` is not recognised as a command, install it globally: 
+`npm install -g mocha`)
+
+then run:
+
+`mocha test/index.js --reporter mochawesome` 
+
+Open the generated file `mochawesome-report/mochawesome.html` in your favourite browser to check tests output.
+A more basic output is also generated and can be viewed by opening `test/index.html` instead.
