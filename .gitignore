@@ -2,3 +2,5 @@
 pack
 .idea/*
 node_modules/*
+mochawesome-report/*
+mochawesome-report/
