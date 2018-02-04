@@ -77,7 +77,6 @@ Run:
 `npm run test` 
 
 Open the generated file `mochawesome-report/mochawesome.html` in your favourite browser to check tests output.
-A more basic output is also generated and can be viewed by opening `test/index.html` instead.
 
 The test script is located in the script section of `package.json`. Edit it according to your needs.
 
@@ -98,3 +97,6 @@ after the line
 and before the `<script>` tag containing `mocha.run()`
 
 Then run the test using the instructions provided above.
+
+
+*If your test script uses libraries, remember to load these before including file containing the tests*

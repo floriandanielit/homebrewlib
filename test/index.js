@@ -256,7 +256,19 @@ describe('HomebrewLib conversion functions:', () => {
   });
 });
 
+/**
+ * Test suite for recipe management functions exported by homebrewlib
+ *   merge, @todo: add
+ *   reset, @fixme
+ *   split, @todo: add
+ *   undo, @todo: add
+ */
 describe('HomebrewLib recipe management functions:', () => {
+  describe('merge function', () => {
+    it.skip('should merge two recipe in a single one', () => {
+
+    });
+  });
   describe('reset function', () => {
     /**
      * @fixme: reset the recipe only partially. For example: malts are replaced by a empty array, while in a new recipe they have some default malt already inserted.
@@ -283,5 +295,62 @@ describe('HomebrewLib recipe management functions:', () => {
       console.log(newRecipe);
     });
   });
+  describe('split function', () => {
+    it.skip('should split the recipe in two half that are equals', () => {
+
+    });
+  });
+  describe('undo function', () => {
+    it.skip('should revert the last action', () => {
+
+    });
+  });
 });
 
+/**
+ * Test suite for beer production functions exported by homebrewlib
+ *   add_water,
+ *   add_sugar
+ *   boil,
+ *   brew,
+ *   bottle,
+ *   ferment,
+ *   mash,
+ */
+describe('HomebrewLib beer production functions:', () => {
+  describe('add_water function', () => {
+    it.skip('function behaviour description', () => {
+
+    });
+  });
+  describe('add_sugar function', () => {
+    it.skip('function behaviour description', () => {
+
+    });
+  });
+  describe('boil function', () => {
+    it.skip('function behaviour description', () => {
+
+    });
+  });
+  describe('brew function', () => {
+    it.skip('function behaviour description', () => {
+
+    });
+  });
+  describe('bottle function', () => {
+    it.skip('function behaviour description', () => {
+
+    });
+  });
+  describe('ferment function', () => {
+    it.skip('function behaviour description', () => {
+
+    });
+  });
+  describe('mash function', () => {
+    it.skip('function behaviour description', () => {
+
+    });
+  });
+});
