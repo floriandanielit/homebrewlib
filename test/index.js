@@ -26,6 +26,14 @@ const homebrewlib = require('../index');
 const chai = require('chai');
 
 const expect = chai.expect;
+/**
+ * Helper function to print debug information for conversion functions
+ * @param from: the name of the starting unit.
+ * @param to: the name of the final unit.
+ * @param iValue: the initial value of the starting unit.
+ * @param fValue: the converted value.
+ */
+const print = (from, to, iValue, fValue) => console.log(`${iValue} ${from} = ${fValue} ${to}`);
 
 /**
  * Test suite for the construction of the object recipe
@@ -115,28 +123,105 @@ describe('Recipe object:', () => {
 });
 
 /**
- * Test suite for the functions exported by homebrewlib
- * @todo: divide into smaller test suites if this becomes too big
+ * Test suite for conversion functions exported by homebrewlib
+ *   c2f,
+ *   f2c,
+ *   l2gal,
+ *   gal2l
+ *   oz2g,
+ *   g2oz,
+ *   lbs2kg,
+ *   kg2lbs,
+ *   obrix2sg,
+ *   fbrix2sg,
  */
-describe('Homebrewlib functions:', () => {
+/**
+ * @fixme: every function returns NaN if the argument is not a number, but NaN is of type number: this can lead to subtle bugs.
+ * @fixme: functions should check its argument and return immediately a error or something diffent from a number to help debugging.
+ * @fixme: functions do not round the number: for example, c2f(30.35) returns 86.63000000000001: this number should be appropriately rounded.
+ * @see: roundFunction at the top of this file.
+ */
+describe('Homebrewlib conversion functions:', () => {
   describe('c2f', () => {
-    /**
-     * @fixme: the function returns NaN if the argument is not of type number, but NaN is of type number, this can lead to subtle bugs.
-     * @fixme: the function should check its argument and return immediately a error or something diffent from a number to help the debug procedures.
-     * @fixme: c2f does not round the number: for example, given 30.35 as input, its output will be: 86.63000000000001: this number should be rounded.
-     * @see: roundFunction at the top of this file.
-     */
     it('should return a number', () => {
+      expect(homebrewlib.c2f).to.be.a('function');
       const celsius = 30.35; // Just a random value
       const fahrenheit = homebrewlib.c2f(celsius);
-      console.log(fahrenheit);
-      console.log(Math.ceil(fahrenheit));
-      expect(fahrenheit).to.be.an('number');
+      print('celsius', 'fahrenheit', celsius, fahrenheit);
+      expect(fahrenheit).to.be.a('number');
     });
   });
   describe('f2c', () => {
     it('should return a number', () => {
-
+      expect(homebrewlib.f2c).to.be.a('function');
+      const fahrenheit = 39.45; // Just a random value
+      const celsius = homebrewlib.f2c(fahrenheit);
+      print('fahrenheit', 'celsius', fahrenheit, celsius);
+      expect(celsius).to.be.a('number');
+    });
+  });
+  describe('l2gal', () => {
+    it('should return a number', () => {
+      expect(homebrewlib.l2gal).to.be.a('function');
+      const litres = 8.54; // Just a random value
+      const gallons = homebrewlib.l2gal(litres);
+      print('litres', 'gallons', litres, gallons);
+      expect(gallons).to.be.a('number');
+    });
+  });
+  describe('gal2l', () => {
+    it('should return a number', () => {
+      expect(homebrewlib.gal2l).to.be.a('function');
+      const gallons = 5.1; // Just a random value
+      const litres = homebrewlib.gal2l(gallons);
+      print('gallons', 'litres', litres, gallons);
+      expect(litres).to.be.a('number');
+    });
+  });
+  describe('oz2g', () => {
+    it('should return a number', () => {
+      expect(homebrewlib.oz2g).to.be.a('function');
+      const oz = 5.1; // Just a random value
+      const gram = homebrewlib.oz2g(oz);
+      print('oz', 'gram', oz, gram);
+      expect(gram).to.be.a('number');
+    });
+  });
+  describe('g2oz', () => {
+    it('should return a number', () => {
+      expect(homebrewlib.g2oz).to.be.a('function');
+      const gram = 5.1; // Just a random value
+      const oz = homebrewlib.g2oz(gram);
+      print('gram', 'oz', gram, oz);
+      expect(oz).to.be.a('number');
+    });
+  });
+  describe('lbs2kg', () => {
+    it('should return a number', () => {
+      expect(homebrewlib.lbs2kg).to.be.a('function');
+      const pound = 5.1; // Just a random value
+      const kilogram = homebrewlib.lbs2kg(pound);
+      print('pound', 'kilogram', pound, kilogram);
+      expect(kilogram).to.be.a('number');
+    });
+  });
+  describe('kg2lbs', () => {
+    it('should return a number', () => {
+      expect(homebrewlib.kg2lbs).to.be.a('function');
+      const kilogram = 5.1; // Just a random value
+      const pound = homebrewlib.kg2lbs(kilogram);
+      print('kilogram', 'pound', kilogram, pound);
+      expect(pound).to.be.a('number');
+    });
+  });
+  describe('obrix2sg', () => {
+    it('should return a number', () => {
+      expect(homebrewlib.obrix2sg).to.be.a('function');
+    });
+  });
+  describe('fbrix2sg', () => {
+    it('should return a number', () => {
+      expect(homebrewlib.fbrix2sg).to.be.a('function');
     });
   });
 });
