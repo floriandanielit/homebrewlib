@@ -148,8 +148,10 @@ function Recipe() {
     grain_volume : 0.67,
 
     // CO2 produced by fermenting sugar (percentage of weight)
-    // source:
-    sugar_to_CO2_conversion : 0.51,
+    // source: http://braukaiser.com/wiki/index.php?title=Accurately_Calculating_Sugar_Additions_for_Carbonation
+    sucrose_to_CO2_conversion  : 0.51,
+    dextrose_to_CO2_conversion : 0.51 * 0.91,
+    extract_to_CO2_conversion  : 0.51 * 0.82 * 0.80,
 
     // Color adjustment in EBC during wort production
     // source:
@@ -197,6 +199,7 @@ function Recipe() {
 
     boil : {
       time : 75,
+      whirlpool : 0,
       hops : [
         {name : 'EKG', type : 'Pellet', weight : 55, aa : 5.9, time : 60, after_hot_break : true},
         {name : 'EKG', type : 'Pellet', weight : 25, aa : 5.9, time : 30, after_hot_break : true},
@@ -208,11 +211,16 @@ function Recipe() {
 
     ferment : {
       yeast : { name: 'WYeast London ESB', type : 'liquid', attenuation : 83},
-      temperature : 20
+      temperature : 20,
+      water_addition : 0,
+      sugar_addition : {qty : 0.0, type : 'Sucrose'}
     },
 
     bottle : {
-      sugar : 250
+      prime : [
+        { type: 'Sucrose', qty: 5.0},
+        { type: 'Speise', qty: 2.0},
+      ]
     }
 
   };
@@ -249,17 +257,19 @@ function Recipe() {
       },
       boil : {
         time : 0,
+        whirlpool : 0,
         hops : [],
         water_addition : 0,
-        sugar_addition : {qty : 0.0, type : 'Sucrose'},
+        sugar_addition : {qty : 0.0, type : 'Sucrose'}
       },
       ferment : {
         yeast : {},
         temperature : 0,
-        water_addition : 0
+        water_addition : 0,
+        sugar_addition : {qty : 0.0, type : 'Sucrose'}
       },
       bottle : {
-        sugar : 0
+        prime : []
       }
     };
     this.state = [
@@ -440,6 +450,10 @@ function Recipe() {
     if (this.process.ferment.water_addition)
       this.add_water(this.process.ferment.water_addition);
 
+    // sugar addition during fermentation
+    if (this.process.ferment.sugar_addition.qty)
+      this.add_sugar(this.process.ferment.sugar_addition.qty, this.process.ferment.sugar_addition.type);
+
     return this;
   };
 
@@ -448,10 +462,22 @@ function Recipe() {
     var wort = this.state[this.state.length - 1];
 
     var prime_co2 = 0;
-    if (this.process.bottle.sugar) {
-      prime_co2 = this.process.bottle.sugar * this.constants.sugar_to_CO2_conversion;
+    if (this.process.bottle.prime) {
+      for (var i = 0; i < this.process.bottle.prime.length; i++) {
+        if (this.process.bottle.prime[i].type == "Sucrose")
+          prime_co2 += this.process.bottle.prime[i].qty * this.constants.sucrose_to_CO2_conversion;
+        if (this.process.bottle.prime[i].type == "Dextrose")
+          prime_co2 += this.process.bottle.prime[i].qty * this.constants.dextrose_to_CO2_conversion;
+        if (this.process.bottle.prime[i].type == "Extract")
+          prime_co2 += this.process.bottle.prime[i].qty * this.constants.extract_to_CO2_conversion;
+        if (this.process.bottle.prime[i].type == "Speise")
+          prime_co2 += 0.5 * this.process.bottle.prime[i].qty * wort.og * sg2p(wort.og)*10 *
+                       0.82 * (100 - 100*sg2p(wort.fg)/sg2p(wort.og)) /
+                       (wort.vol + this.process.bottle.prime[i].qty) / wort.vol;
+                       // to be fixed: does not yer subtract needed volume from wort volume!
+      }
+
     }
-    // todo: add other priming methods
     // todo: add volume of possible priming solutions
 
     var prime_abv = (this.process.bottle.sugar - prime_co2) / wort.vol / 0.794 / 10;
@@ -464,7 +490,7 @@ function Recipe() {
       abv  : wort.abv + prime_abv,
       ebc  : wort.ebc,
       ibu  : wort.ibu,
-      co2  : wort.co2 + prime_co2/wort.vol
+      co2  : wort.co2 + prime_co2
     });
 
     return this;
