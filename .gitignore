@@ -1,2 +1,4 @@
 .DS_Store
 pack
+.idea/*
+node_modules/*

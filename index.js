@@ -1,5 +1,11 @@
 //// basic conversion/brewing functions
 
+// @todo: Recipe object should be inserted in a closure or in a class in a different file.
+// @todo: basic conversion functions should be inserted in another file (maybe in a class).
+// @todo: also brewing function should be put in a single file.
+// @todo: this file can be re-written using the new ECMAScript6 syntax, and transpiled using babel to ensure compatibily with older browser
+// @todo: even though ECMA6 is already compatible with almost everything except Internet Explorer 11 (of course...)
+
 // temperature from Celsius to Fahrenheit
 // example: 0˚C >> 32F
 c2f = function (temp) {
@@ -563,6 +569,7 @@ module.exports = {
 /// recipe management functions
 
   // returns a recipe object to work with
+  // @fixme: the Recipe object can be directly exported and used with the keywoard new.
   newRecipe : function () {
     return new Recipe();
   }

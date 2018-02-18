@@ -60,3 +60,43 @@ You see, `ugly.js` is the input file we want to process. The option
 global object. `homebrewlib` is the name of the object and `homebrewlib.min.js`
 the name of the JavaScript file to be created. This is the file you can include
 in your HTML code as shown above.
+
+# Testing
+## Setting UP
+Run:
+
+`npm install`
+
+To install the package needed for testing.
+
+*While homebrewLib works in a browser environment (without nodeJS), tests
+require some npm packages to work.*
+## Running test
+Run:
+
+`npm run test` 
+
+Open the generated file `mochawesome-report/mochawesome.html` in your favourite browser to check tests output.
+
+The test script is located in the script section of `package.json`. Edit it according to your needs.
+
+Mocha timeout can be changed using the flag `--timeout XXX` where `XXX` is a number in millisecond:
+some test may require a higher timeout depending on the code tested.
+
+## How to write a test
+Create a file *.js containing the code for the test in the directory `./test`. This file should have the same name of
+the file which contains the code you're testing (but it's not mandatory). Include this new file in `./test/index.html`
+using the HTML `script` tag:
+
+`<script href="path_to_your_file.js">`
+
+after the line 
+
+`<script>mocha.setup('bdd')</script>`
+
+and before the `<script>` tag containing `mocha.run()`
+
+Then run the test using the instructions provided above.
+
+
+*If your test script uses libraries, remember to load these before including file containing the tests*
