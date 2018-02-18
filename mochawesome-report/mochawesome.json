@@ -1,0 +1,1153 @@
+{
+  "stats": {
+    "suites": 29,
+    "tests": 31,
+    "passes": 20,
+    "pending": 11,
+    "failures": 0,
+    "start": "2018-02-04T20:52:45.635Z",
+    "end": "2018-02-04T20:52:45.656Z",
+    "duration": 21,
+    "testsRegistered": 31,
+    "passPercent": 100,
+    "pendingPercent": 35.5,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "passPercentClass": "success",
+    "pendingPercentClass": "danger"
+  },
+  "suites": {
+    "uuid": "4e28b640-753e-40d7-88ea-543b5e0ef1af",
+    "title": "",
+    "fullFile": "",
+    "file": "",
+    "beforeHooks": [],
+    "afterHooks": [],
+    "tests": [],
+    "suites": [
+      {
+        "uuid": "91e83609-7165-44c2-9bd0-d61cf00dd389",
+        "title": "Recipe object:",
+        "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+        "file": "/test/index.js",
+        "beforeHooks": [],
+        "afterHooks": [],
+        "tests": [],
+        "suites": [
+          {
+            "uuid": "accc4f8d-3f6d-451c-b821-98497e071004",
+            "title": "constructor",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "[recipe] a valid recipe object should exists",
+                "fullTitle": "Recipe object: constructor [recipe] a valid recipe object should exists",
+                "timedOut": false,
+                "duration": 1,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(recipe).to.be.an('object');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "720e1c7e-10d6-4d54-bada-b1a9fc3e4bf1",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "[recipe] should contain the following constants",
+                "fullTitle": "Recipe object: constructor [recipe] should contain the following constants",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(recipe.constants.grain_absorption).to.be.a('number');\nexpect(recipe.constants.grain_absorption).to.equal(1.04);\nexpect(recipe.constants.grain_volume).to.be.a('number');\nexpect(recipe.constants.grain_volume).to.equal(0.67);\nexpect(recipe.constants.sugar_to_CO2_conversion).to.be.a('number');\nexpect(recipe.constants.sugar_to_CO2_conversion).to.equal(0.51);\nexpect(recipe.constants.color_adjustment).to.be.a('number');\nexpect(recipe.constants.color_adjustment).to.equal(3);",
+                "err": {},
+                "isRoot": false,
+                "uuid": "c9a10d0b-0510-427e-85d8-bf0e0e783412",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "[recipe] should contain the following equipment:",
+                "fullTitle": "Recipe object: constructor [recipe] should contain the following equipment:",
+                "timedOut": false,
+                "duration": 1,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(recipe.equipment.mash_max_volume).to.be.a('number');\nexpect(recipe.equipment.mash_max_volume).to.equal(50);\nexpect(recipe.equipment.mash_efficiency_weight).to.be.a('number');\nexpect(recipe.equipment.mash_efficiency_weight).to.equal(0.751);\nexpect(recipe.equipment.mash_efficiency_potential).to.be.a('number');\nexpect(recipe.equipment.mash_efficiency_potential).to.equal(0.91);\nexpect(recipe.equipment.mash_false_bottom_volume).to.be.a('number');\nexpect(recipe.equipment.mash_false_bottom_volume).to.equal(5);\nexpect(recipe.equipment.mash_loss).to.be.a('number');\nexpect(recipe.equipment.mash_loss).to.equal(0);\nexpect(recipe.equipment.sparge_max_volume).to.be.a('number');\nexpect(recipe.equipment.sparge_max_volume).to.equal(50);\nexpect(recipe.equipment.boil_max_volume).to.be.a('number');\nexpect(recipe.equipment.boil_max_volume).to.equal(70);\nexpect(recipe.equipment.boil_evaporation_rate).to.be.a('number');\nexpect(recipe.equipment.boil_evaporation_rate).to.equal(8.3);\nexpect(recipe.equipment.boil_loss).to.be.a('number');\nexpect(recipe.equipment.boil_loss).to.equal(2);\nexpect(recipe.equipment.whirlpool_loss).to.be.a('number');\nexpect(recipe.equipment.whirlpool_loss).to.equal(0);\nexpect(recipe.equipment.fermentation_max_volume).to.be.a('number');\nexpect(recipe.equipment.fermentation_max_volume).to.equal(60);\nexpect(recipe.equipment.fermentation_loss).to.be.a('number');\nexpect(recipe.equipment.fermentation_loss).to.equal(1.5);",
+                "err": {},
+                "isRoot": false,
+                "uuid": "bb421181-991e-4c90-a30f-9dbbdf3df558",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "[recipe] should have the following 'process'",
+                "fullTitle": "Recipe object: constructor [recipe] should have the following 'process'",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(recipe.process).to.be.an('object');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "8b010270-43ff-4bb7-b277-095c47c12a80",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "should have a 'state'",
+                "fullTitle": "Recipe object: constructor should have a 'state'",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(recipe.state[0]).to.be.an('object');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "3c6ed8ac-be41-4cb5-b57b-ed1afb87845e",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "[state] should have the following properties:",
+                "fullTitle": "Recipe object: constructor [state] should have the following properties:",
+                "timedOut": false,
+                "duration": 1,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(recipe.state[0].name).to.be.a('string');\nexpect(recipe.state[0].name).to.equal('Mash water');\nexpect(recipe.state[0].vol).to.be.a('number');\nexpect(recipe.state[0].vol).to.equal(28);\nexpect(recipe.state[0].og).to.be.a('number');\nexpect(recipe.state[0].og).to.equal(1);\nexpect(recipe.state[0].fg).to.be.a('number');\nexpect(recipe.state[0].fg).to.equal(1);\nexpect(recipe.state[0].abv).to.be.a('number');\nexpect(recipe.state[0].abv).to.equal(0);\nexpect(recipe.state[0].ebc).to.be.a('number');\nexpect(recipe.state[0].ebc).to.equal(0);\nexpect(recipe.state[0].ibu).to.be.a('number');\nexpect(recipe.state[0].ibu).to.equal(0);\nexpect(recipe.state[0].co2).to.be.a('number');\nexpect(recipe.state[0].co2).to.equal(0);",
+                "err": {},
+                "isRoot": false,
+                "uuid": "a3e8f6b5-ea72-45d2-97d6-18713c38c126",
+                "isHook": false,
+                "skipped": false
+              },
+              {
+                "title": "[recipe] should have the following functions:",
+                "fullTitle": "Recipe object: constructor [recipe] should have the following functions:",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(recipe.reset).to.be.a('function');\nexpect(recipe.add_water).to.be.a('function');\nexpect(recipe.add_sugar).to.be.a('function');\nexpect(recipe.mash).to.be.a('function');\nexpect(recipe.boil).to.be.a('function');\nexpect(recipe.ferment).to.be.a('function');\nexpect(recipe.bottle).to.be.a('function');\nexpect(recipe.brew).to.be.a('function');\nexpect(recipe.undo).to.be.a('function');\nexpect(recipe.split).to.be.a('function');\nexpect(recipe.merge).to.be.a('function');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "73b31d25-f6a1-4eb3-af38-98b463790292",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "720e1c7e-10d6-4d54-bada-b1a9fc3e4bf1",
+              "c9a10d0b-0510-427e-85d8-bf0e0e783412",
+              "bb421181-991e-4c90-a30f-9dbbdf3df558",
+              "8b010270-43ff-4bb7-b277-095c47c12a80",
+              "3c6ed8ac-be41-4cb5-b57b-ed1afb87845e",
+              "a3e8f6b5-ea72-45d2-97d6-18713c38c126",
+              "73b31d25-f6a1-4eb3-af38-98b463790292"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 3,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          }
+        ],
+        "passes": [],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 0,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 2000
+      },
+      {
+        "uuid": "828ad31b-8f73-4a57-ab93-57e6786f405e",
+        "title": "HomebrewLib conversion functions:",
+        "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+        "file": "/test/index.js",
+        "beforeHooks": [],
+        "afterHooks": [],
+        "tests": [],
+        "suites": [
+          {
+            "uuid": "096ffed6-84de-4e43-8c44-55a1ae86793d",
+            "title": "c2f",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: c2f should return a number",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.c2f).to.be.a('function');\nconst celsius = 30.35; // Just a random value\nconst fahrenheit = homebrewlib.c2f(celsius);\nprint('celsius', 'fahrenheit', celsius, fahrenheit);\nexpect(fahrenheit).to.be.a('number');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "6d7d6583-e4ba-42da-ac2e-d5d72f9d3f27",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "6d7d6583-e4ba-42da-ac2e-d5d72f9d3f27"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "97597c1e-0203-4e2d-8e44-6bff778ba672",
+            "title": "f2c",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: f2c should return a number",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.f2c).to.be.a('function');\nconst fahrenheit = 39.45; // Just a random value\nconst celsius = homebrewlib.f2c(fahrenheit);\nprint('fahrenheit', 'celsius', fahrenheit, celsius);\nexpect(celsius).to.be.a('number');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "70541525-c169-40ad-9ff1-0ac2134d7ad2",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "70541525-c169-40ad-9ff1-0ac2134d7ad2"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "52e62489-6d28-4f43-9229-0307ce60083a",
+            "title": "l2gal",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: l2gal should return a number",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.l2gal).to.be.a('function');\nconst litres = 8.54; // Just a random value\nconst gallons = homebrewlib.l2gal(litres);\nprint('litres', 'gallons', litres, gallons);\nexpect(gallons).to.be.a('number');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "0b72e682-f3bd-4cf2-9b80-4b023735b89d",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "0b72e682-f3bd-4cf2-9b80-4b023735b89d"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "b2a0ad3d-514b-4b13-b6cc-861c8bbe0683",
+            "title": "gal2l",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: gal2l should return a number",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.gal2l).to.be.a('function');\nconst gallons = 5.1; // Just a random value\nconst litres = homebrewlib.gal2l(gallons);\nprint('gallons', 'litres', litres, gallons);\nexpect(litres).to.be.a('number');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "c5f1091e-7335-40d5-acc4-2d820e9c897a",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "c5f1091e-7335-40d5-acc4-2d820e9c897a"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "f5ee336b-b903-4ea4-8008-524ff3ac36ca",
+            "title": "oz2g",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: oz2g should return a number",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.oz2g).to.be.a('function');\nconst oz = 5.1; // Just a random value\nconst gram = homebrewlib.oz2g(oz);\nprint('oz', 'gram', oz, gram);\nexpect(gram).to.be.a('number');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "28658692-6579-4607-bce0-717f0f29c3cc",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "28658692-6579-4607-bce0-717f0f29c3cc"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "cf1262f5-fa7d-4535-809c-a0021d14dbf0",
+            "title": "g2oz",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: g2oz should return a number",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.g2oz).to.be.a('function');\nconst gram = 5.1; // Just a random value\nconst oz = homebrewlib.g2oz(gram);\nprint('gram', 'oz', gram, oz);\nexpect(oz).to.be.a('number');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "8e2f8395-f4c3-4dc3-9e8a-a73dbdd5d874",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "8e2f8395-f4c3-4dc3-9e8a-a73dbdd5d874"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "ddcc4d16-e537-48e2-85d8-2b69fb7740f4",
+            "title": "lbs2kg",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: lbs2kg should return a number",
+                "timedOut": false,
+                "duration": 1,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.lbs2kg).to.be.a('function');\nconst pound = 5.1; // Just a random value\nconst kilogram = homebrewlib.lbs2kg(pound);\nprint('pound', 'kilogram', pound, kilogram);\nexpect(kilogram).to.be.a('number');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "2a991fd6-8251-40f6-a104-6666831238ec",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "2a991fd6-8251-40f6-a104-6666831238ec"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 1,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "3818e054-1ea7-4d89-a41d-216d4c33af46",
+            "title": "kg2lbs",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: kg2lbs should return a number",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.kg2lbs).to.be.a('function');\nconst kilogram = 5.1; // Just a random value\nconst pound = homebrewlib.kg2lbs(kilogram);\nprint('kilogram', 'pound', kilogram, pound);\nexpect(pound).to.be.a('number');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "105fff99-2941-4a04-987a-5250d31a445b",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "105fff99-2941-4a04-987a-5250d31a445b"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "be342374-cbdc-4a2b-89f0-a28aff94e9e7",
+            "title": "obrix2sg",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: obrix2sg should return a number",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.obrix2sg).to.be.a('function');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "5176af2d-ed6c-43f0-9738-2c308038cbda",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "5176af2d-ed6c-43f0-9738-2c308038cbda"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "e57d2017-3edd-4a40-aea0-3f43415f561d",
+            "title": "fbrix2sg",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: fbrix2sg should return a number",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.fbrix2sg).to.be.a('function');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "8f57500e-bedc-4e1d-af70-63902ca919a5",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "8f57500e-bedc-4e1d-af70-63902ca919a5"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "77a1ab73-9097-45cb-8249-f09f12fc8a5d",
+            "title": "get_ABW",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: get_ABW should return a number",
+                "timedOut": false,
+                "duration": 1,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.get_ABW).to.be.a('function');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "793e3232-a4ed-4433-bb14-359882c86807",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "793e3232-a4ed-4433-bb14-359882c86807"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 1,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "f44ebd83-fbf7-46d7-b68b-5904a2027ccc",
+            "title": "ABW2ABV",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: ABW2ABV should return a number",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.ABW2ABV).to.be.a('function');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "a05b22c5-012a-4828-ab00-0f148a17b29c",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "a05b22c5-012a-4828-ab00-0f148a17b29c"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "7f60187c-2602-42e7-a106-c2e8801ade55",
+            "title": "get_attenuation",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should return a number",
+                "fullTitle": "HomebrewLib conversion functions: get_attenuation should return a number",
+                "timedOut": false,
+                "duration": 0,
+                "state": "passed",
+                "speed": "fast",
+                "pass": true,
+                "fail": false,
+                "pending": false,
+                "code": "expect(homebrewlib.get_attenuation).to.be.a('function');",
+                "err": {},
+                "isRoot": false,
+                "uuid": "38ef4431-6663-4b07-9fb9-14e608cac0a1",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [
+              "38ef4431-6663-4b07-9fb9-14e608cac0a1"
+            ],
+            "failures": [],
+            "pending": [],
+            "skipped": [],
+            "duration": 0,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          }
+        ],
+        "passes": [],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 0,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 2000
+      },
+      {
+        "uuid": "453f3b78-c63e-4cd5-9d9d-57ce54da8c6d",
+        "title": "HomebrewLib recipe management functions:",
+        "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+        "file": "/test/index.js",
+        "beforeHooks": [],
+        "afterHooks": [],
+        "tests": [],
+        "suites": [
+          {
+            "uuid": "5b8c3fde-6e0f-4aca-8f47-5bb52b94a65f",
+            "title": "merge function",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should merge two recipe in a single one",
+                "fullTitle": "HomebrewLib recipe management functions: merge function should merge two recipe in a single one",
+                "timedOut": false,
+                "duration": 0,
+                "pass": false,
+                "fail": false,
+                "pending": true,
+                "code": "",
+                "err": {},
+                "isRoot": false,
+                "uuid": "6766a08e-383c-46a9-8689-d36bd9e36f6b",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [],
+            "pending": [
+              "6766a08e-383c-46a9-8689-d36bd9e36f6b"
+            ],
+            "skipped": [],
+            "duration": null,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "37322ca6-0384-479b-942c-03da9af17ae9",
+            "title": "reset function",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should reset the current recipe object to its default values",
+                "fullTitle": "HomebrewLib recipe management functions: reset function should reset the current recipe object to its default values",
+                "timedOut": false,
+                "duration": 0,
+                "pass": false,
+                "fail": false,
+                "pending": true,
+                "code": "",
+                "err": {},
+                "isRoot": false,
+                "uuid": "6f1a3259-503d-445e-88ad-6a389e5aea98",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [],
+            "pending": [
+              "6f1a3259-503d-445e-88ad-6a389e5aea98"
+            ],
+            "skipped": [],
+            "duration": null,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "5d110988-331a-4700-bc06-d0098c36b277",
+            "title": "split function",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should split the recipe in two half that are equals",
+                "fullTitle": "HomebrewLib recipe management functions: split function should split the recipe in two half that are equals",
+                "timedOut": false,
+                "duration": 0,
+                "pass": false,
+                "fail": false,
+                "pending": true,
+                "code": "",
+                "err": {},
+                "isRoot": false,
+                "uuid": "7a699aac-1e23-4dc3-a39c-4355f9ea37d3",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [],
+            "pending": [
+              "7a699aac-1e23-4dc3-a39c-4355f9ea37d3"
+            ],
+            "skipped": [],
+            "duration": null,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "d021ce4d-64d2-431d-8d83-69631b501f1c",
+            "title": "undo function",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "should revert the last action",
+                "fullTitle": "HomebrewLib recipe management functions: undo function should revert the last action",
+                "timedOut": false,
+                "duration": 0,
+                "pass": false,
+                "fail": false,
+                "pending": true,
+                "code": "",
+                "err": {},
+                "isRoot": false,
+                "uuid": "30ffb438-67bd-4ffe-8381-d87d9a3dd165",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [],
+            "pending": [
+              "30ffb438-67bd-4ffe-8381-d87d9a3dd165"
+            ],
+            "skipped": [],
+            "duration": null,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          }
+        ],
+        "passes": [],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 0,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 2000
+      },
+      {
+        "uuid": "8225b58d-5d06-4575-9996-b66b544acb76",
+        "title": "HomebrewLib beer production functions:",
+        "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+        "file": "/test/index.js",
+        "beforeHooks": [],
+        "afterHooks": [],
+        "tests": [],
+        "suites": [
+          {
+            "uuid": "17cddf03-37aa-4dcc-ab39-cf59b76ec66a",
+            "title": "add_water function",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "function behaviour description",
+                "fullTitle": "HomebrewLib beer production functions: add_water function function behaviour description",
+                "timedOut": false,
+                "duration": 0,
+                "pass": false,
+                "fail": false,
+                "pending": true,
+                "code": "",
+                "err": {},
+                "isRoot": false,
+                "uuid": "6a035079-68d6-493e-88bc-0cced21433c9",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [],
+            "pending": [
+              "6a035079-68d6-493e-88bc-0cced21433c9"
+            ],
+            "skipped": [],
+            "duration": null,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "a7ac75d5-326b-4a0d-8bf7-22977ca8914c",
+            "title": "add_sugar function",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "function behaviour description",
+                "fullTitle": "HomebrewLib beer production functions: add_sugar function function behaviour description",
+                "timedOut": false,
+                "duration": 0,
+                "pass": false,
+                "fail": false,
+                "pending": true,
+                "code": "",
+                "err": {},
+                "isRoot": false,
+                "uuid": "3e10dfe4-fb4c-41cb-896d-560ea7a6a617",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [],
+            "pending": [
+              "3e10dfe4-fb4c-41cb-896d-560ea7a6a617"
+            ],
+            "skipped": [],
+            "duration": null,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "1dd7e957-4db9-4959-9123-181dd9700eca",
+            "title": "boil function",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "function behaviour description",
+                "fullTitle": "HomebrewLib beer production functions: boil function function behaviour description",
+                "timedOut": false,
+                "duration": 0,
+                "pass": false,
+                "fail": false,
+                "pending": true,
+                "code": "",
+                "err": {},
+                "isRoot": false,
+                "uuid": "1b99ceb9-0f42-47be-915f-5fe675c0693d",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [],
+            "pending": [
+              "1b99ceb9-0f42-47be-915f-5fe675c0693d"
+            ],
+            "skipped": [],
+            "duration": null,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "4d2bdc95-eaa3-47c8-945a-abd91cfbfe5e",
+            "title": "brew function",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "function behaviour description",
+                "fullTitle": "HomebrewLib beer production functions: brew function function behaviour description",
+                "timedOut": false,
+                "duration": 0,
+                "pass": false,
+                "fail": false,
+                "pending": true,
+                "code": "",
+                "err": {},
+                "isRoot": false,
+                "uuid": "3e5ba4db-4d95-4039-82ed-f589bbbb7fe9",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [],
+            "pending": [
+              "3e5ba4db-4d95-4039-82ed-f589bbbb7fe9"
+            ],
+            "skipped": [],
+            "duration": null,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "10bf4a29-1033-4431-916c-106150c45f73",
+            "title": "bottle function",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "function behaviour description",
+                "fullTitle": "HomebrewLib beer production functions: bottle function function behaviour description",
+                "timedOut": false,
+                "duration": 0,
+                "pass": false,
+                "fail": false,
+                "pending": true,
+                "code": "",
+                "err": {},
+                "isRoot": false,
+                "uuid": "e4fe326b-9d15-4b14-8737-b06f791edba1",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [],
+            "pending": [
+              "e4fe326b-9d15-4b14-8737-b06f791edba1"
+            ],
+            "skipped": [],
+            "duration": null,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "6ca08280-c45d-474a-bca6-7bc0f877fd48",
+            "title": "ferment function",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "function behaviour description",
+                "fullTitle": "HomebrewLib beer production functions: ferment function function behaviour description",
+                "timedOut": false,
+                "duration": 0,
+                "pass": false,
+                "fail": false,
+                "pending": true,
+                "code": "",
+                "err": {},
+                "isRoot": false,
+                "uuid": "336112a5-020b-4964-98be-202f5891cd4b",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [],
+            "pending": [
+              "336112a5-020b-4964-98be-202f5891cd4b"
+            ],
+            "skipped": [],
+            "duration": null,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          },
+          {
+            "uuid": "674138aa-5185-407e-8819-859dacb28cd8",
+            "title": "mash function",
+            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "file": "/test/index.js",
+            "beforeHooks": [],
+            "afterHooks": [],
+            "tests": [
+              {
+                "title": "function behaviour description",
+                "fullTitle": "HomebrewLib beer production functions: mash function function behaviour description",
+                "timedOut": false,
+                "duration": 0,
+                "pass": false,
+                "fail": false,
+                "pending": true,
+                "code": "",
+                "err": {},
+                "isRoot": false,
+                "uuid": "f732e52a-317c-4097-a341-1903e8ef88ad",
+                "isHook": false,
+                "skipped": false
+              }
+            ],
+            "suites": [],
+            "passes": [],
+            "failures": [],
+            "pending": [
+              "f732e52a-317c-4097-a341-1903e8ef88ad"
+            ],
+            "skipped": [],
+            "duration": null,
+            "root": false,
+            "rootEmpty": false,
+            "_timeout": 2000
+          }
+        ],
+        "passes": [],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 0,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 2000
+      }
+    ],
+    "passes": [],
+    "failures": [],
+    "pending": [],
+    "skipped": [],
+    "duration": 0,
+    "root": true,
+    "rootEmpty": true,
+    "_timeout": 2000
+  },
+  "copyrightYear": 2018
+}
