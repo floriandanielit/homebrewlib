@@ -1,6 +1,6 @@
 {
   "name": "homebrewlib",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "A JavaScript library for homebrew recipe calculations",
   "main": "index.js",
   "scripts": {
