@@ -2,24 +2,24 @@
   "stats": {
     "suites": 29,
     "tests": 31,
-    "passes": 20,
+    "passes": 1,
     "pending": 11,
-    "failures": 0,
-    "start": "2018-02-04T20:52:45.635Z",
-    "end": "2018-02-04T20:52:45.656Z",
-    "duration": 21,
+    "failures": 19,
+    "start": "2018-04-17T06:37:22.168Z",
+    "end": "2018-04-17T06:37:22.231Z",
+    "duration": 63,
     "testsRegistered": 31,
-    "passPercent": 100,
+    "passPercent": 5,
     "pendingPercent": 35.5,
     "other": 0,
     "hasOther": false,
     "skipped": 0,
     "hasSkipped": false,
-    "passPercentClass": "success",
+    "passPercentClass": "danger",
     "pendingPercentClass": "danger"
   },
   "suites": {
-    "uuid": "4e28b640-753e-40d7-88ea-543b5e0ef1af",
+    "uuid": "04f08c5a-2e8d-4fb4-b724-879d77f0202b",
     "title": "",
     "fullFile": "",
     "file": "",
@@ -28,18 +28,18 @@
     "tests": [],
     "suites": [
       {
-        "uuid": "91e83609-7165-44c2-9bd0-d61cf00dd389",
+        "uuid": "0c4055f7-38bc-4329-aa5d-a0bc7df2a035",
         "title": "Recipe object:",
-        "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+        "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
         "file": "/test/index.js",
         "beforeHooks": [],
         "afterHooks": [],
         "tests": [],
         "suites": [
           {
-            "uuid": "accc4f8d-3f6d-451c-b821-98497e071004",
+            "uuid": "013a44d7-09d2-4e52-930a-8d6aa4c82299",
             "title": "constructor",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -48,7 +48,7 @@
                 "title": "[recipe] a valid recipe object should exists",
                 "fullTitle": "Recipe object: constructor [recipe] a valid recipe object should exists",
                 "timedOut": false,
-                "duration": 1,
+                "duration": 2,
                 "state": "passed",
                 "speed": "fast",
                 "pass": true,
@@ -57,7 +57,7 @@
                 "code": "expect(recipe).to.be.an('object');",
                 "err": {},
                 "isRoot": false,
-                "uuid": "720e1c7e-10d6-4d54-bada-b1a9fc3e4bf1",
+                "uuid": "eb6b76a9-bad2-4e82-bc21-d42f9083dac7",
                 "isHook": false,
                 "skipped": false
               },
@@ -65,16 +65,18 @@
                 "title": "[recipe] should contain the following constants",
                 "fullTitle": "Recipe object: constructor [recipe] should contain the following constants",
                 "timedOut": false,
-                "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "duration": 1,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(recipe.constants.grain_absorption).to.be.a('number');\nexpect(recipe.constants.grain_absorption).to.equal(1.04);\nexpect(recipe.constants.grain_volume).to.be.a('number');\nexpect(recipe.constants.grain_volume).to.equal(0.67);\nexpect(recipe.constants.sugar_to_CO2_conversion).to.be.a('number');\nexpect(recipe.constants.sugar_to_CO2_conversion).to.equal(0.51);\nexpect(recipe.constants.color_adjustment).to.be.a('number');\nexpect(recipe.constants.color_adjustment).to.equal(3);",
-                "err": {},
+                "err": {
+                  "message": "TypeError: Cannot read property 'grain_absorption' of undefined",
+                  "estack": "TypeError: Cannot read property 'grain_absorption' of undefined\n    at Context.it (test/index.js:49:30)"
+                },
                 "isRoot": false,
-                "uuid": "c9a10d0b-0510-427e-85d8-bf0e0e783412",
+                "uuid": "ee052814-3a60-424c-b9bd-135aed99741f",
                 "isHook": false,
                 "skipped": false
               },
@@ -82,16 +84,18 @@
                 "title": "[recipe] should contain the following equipment:",
                 "fullTitle": "Recipe object: constructor [recipe] should contain the following equipment:",
                 "timedOut": false,
-                "duration": 1,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "duration": 3,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(recipe.equipment.mash_max_volume).to.be.a('number');\nexpect(recipe.equipment.mash_max_volume).to.equal(50);\nexpect(recipe.equipment.mash_efficiency_weight).to.be.a('number');\nexpect(recipe.equipment.mash_efficiency_weight).to.equal(0.751);\nexpect(recipe.equipment.mash_efficiency_potential).to.be.a('number');\nexpect(recipe.equipment.mash_efficiency_potential).to.equal(0.91);\nexpect(recipe.equipment.mash_false_bottom_volume).to.be.a('number');\nexpect(recipe.equipment.mash_false_bottom_volume).to.equal(5);\nexpect(recipe.equipment.mash_loss).to.be.a('number');\nexpect(recipe.equipment.mash_loss).to.equal(0);\nexpect(recipe.equipment.sparge_max_volume).to.be.a('number');\nexpect(recipe.equipment.sparge_max_volume).to.equal(50);\nexpect(recipe.equipment.boil_max_volume).to.be.a('number');\nexpect(recipe.equipment.boil_max_volume).to.equal(70);\nexpect(recipe.equipment.boil_evaporation_rate).to.be.a('number');\nexpect(recipe.equipment.boil_evaporation_rate).to.equal(8.3);\nexpect(recipe.equipment.boil_loss).to.be.a('number');\nexpect(recipe.equipment.boil_loss).to.equal(2);\nexpect(recipe.equipment.whirlpool_loss).to.be.a('number');\nexpect(recipe.equipment.whirlpool_loss).to.equal(0);\nexpect(recipe.equipment.fermentation_max_volume).to.be.a('number');\nexpect(recipe.equipment.fermentation_max_volume).to.equal(60);\nexpect(recipe.equipment.fermentation_loss).to.be.a('number');\nexpect(recipe.equipment.fermentation_loss).to.equal(1.5);",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a number",
+                  "estack": "AssertionError: expected undefined to be a number\n    at Context.it (test/index.js:59:54)"
+                },
                 "isRoot": false,
-                "uuid": "bb421181-991e-4c90-a30f-9dbbdf3df558",
+                "uuid": "65af44ea-1fac-4629-9460-045f80407780",
                 "isHook": false,
                 "skipped": false
               },
@@ -99,16 +103,18 @@
                 "title": "[recipe] should have the following 'process'",
                 "fullTitle": "Recipe object: constructor [recipe] should have the following 'process'",
                 "timedOut": false,
-                "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "duration": 5,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(recipe.process).to.be.an('object');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected [ Array(1) ] to be an object",
+                  "estack": "AssertionError: expected [ Array(1) ] to be an object\n    at Context.it (test/index.js:85:36)"
+                },
                 "isRoot": false,
-                "uuid": "8b010270-43ff-4bb7-b277-095c47c12a80",
+                "uuid": "4b28d1d9-8f0a-4b20-8f65-f902ea7b2ea7",
                 "isHook": false,
                 "skipped": false
               },
@@ -117,15 +123,17 @@
                 "fullTitle": "Recipe object: constructor should have a 'state'",
                 "timedOut": false,
                 "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(recipe.state[0]).to.be.an('object');",
-                "err": {},
+                "err": {
+                  "message": "TypeError: Cannot read property '0' of undefined",
+                  "estack": "TypeError: Cannot read property '0' of undefined\n    at Context.it (test/index.js:89:26)"
+                },
                 "isRoot": false,
-                "uuid": "3c6ed8ac-be41-4cb5-b57b-ed1afb87845e",
+                "uuid": "83e1b9f3-aa3b-466f-a31a-dfea9ce7ff22",
                 "isHook": false,
                 "skipped": false
               },
@@ -134,15 +142,17 @@
                 "fullTitle": "Recipe object: constructor [state] should have the following properties:",
                 "timedOut": false,
                 "duration": 1,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(recipe.state[0].name).to.be.a('string');\nexpect(recipe.state[0].name).to.equal('Mash water');\nexpect(recipe.state[0].vol).to.be.a('number');\nexpect(recipe.state[0].vol).to.equal(28);\nexpect(recipe.state[0].og).to.be.a('number');\nexpect(recipe.state[0].og).to.equal(1);\nexpect(recipe.state[0].fg).to.be.a('number');\nexpect(recipe.state[0].fg).to.equal(1);\nexpect(recipe.state[0].abv).to.be.a('number');\nexpect(recipe.state[0].abv).to.equal(0);\nexpect(recipe.state[0].ebc).to.be.a('number');\nexpect(recipe.state[0].ebc).to.equal(0);\nexpect(recipe.state[0].ibu).to.be.a('number');\nexpect(recipe.state[0].ibu).to.equal(0);\nexpect(recipe.state[0].co2).to.be.a('number');\nexpect(recipe.state[0].co2).to.equal(0);",
-                "err": {},
+                "err": {
+                  "message": "TypeError: Cannot read property '0' of undefined",
+                  "estack": "TypeError: Cannot read property '0' of undefined\n    at Context.it (test/index.js:92:26)"
+                },
                 "isRoot": false,
-                "uuid": "a3e8f6b5-ea72-45d2-97d6-18713c38c126",
+                "uuid": "77a0888a-c118-4ab7-ac4a-a4bbfbf67596",
                 "isHook": false,
                 "skipped": false
               },
@@ -150,34 +160,37 @@
                 "title": "[recipe] should have the following functions:",
                 "fullTitle": "Recipe object: constructor [recipe] should have the following functions:",
                 "timedOut": false,
-                "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "duration": 1,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(recipe.reset).to.be.a('function');\nexpect(recipe.add_water).to.be.a('function');\nexpect(recipe.add_sugar).to.be.a('function');\nexpect(recipe.mash).to.be.a('function');\nexpect(recipe.boil).to.be.a('function');\nexpect(recipe.ferment).to.be.a('function');\nexpect(recipe.bottle).to.be.a('function');\nexpect(recipe.brew).to.be.a('function');\nexpect(recipe.undo).to.be.a('function');\nexpect(recipe.split).to.be.a('function');\nexpect(recipe.merge).to.be.a('function');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:111:38)"
+                },
                 "isRoot": false,
-                "uuid": "73b31d25-f6a1-4eb3-af38-98b463790292",
+                "uuid": "d3b9b5bc-67aa-4ad8-ae12-758ffaf78027",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
             "passes": [
-              "720e1c7e-10d6-4d54-bada-b1a9fc3e4bf1",
-              "c9a10d0b-0510-427e-85d8-bf0e0e783412",
-              "bb421181-991e-4c90-a30f-9dbbdf3df558",
-              "8b010270-43ff-4bb7-b277-095c47c12a80",
-              "3c6ed8ac-be41-4cb5-b57b-ed1afb87845e",
-              "a3e8f6b5-ea72-45d2-97d6-18713c38c126",
-              "73b31d25-f6a1-4eb3-af38-98b463790292"
+              "eb6b76a9-bad2-4e82-bc21-d42f9083dac7"
             ],
-            "failures": [],
+            "failures": [
+              "ee052814-3a60-424c-b9bd-135aed99741f",
+              "65af44ea-1fac-4629-9460-045f80407780",
+              "4b28d1d9-8f0a-4b20-8f65-f902ea7b2ea7",
+              "83e1b9f3-aa3b-466f-a31a-dfea9ce7ff22",
+              "77a0888a-c118-4ab7-ac4a-a4bbfbf67596",
+              "d3b9b5bc-67aa-4ad8-ae12-758ffaf78027"
+            ],
             "pending": [],
             "skipped": [],
-            "duration": 3,
+            "duration": 13,
             "root": false,
             "rootEmpty": false,
             "_timeout": 2000
@@ -193,18 +206,18 @@
         "_timeout": 2000
       },
       {
-        "uuid": "828ad31b-8f73-4a57-ab93-57e6786f405e",
+        "uuid": "ef0bbf47-ecd0-4d90-9700-62ab43627ba9",
         "title": "HomebrewLib conversion functions:",
-        "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+        "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
         "file": "/test/index.js",
         "beforeHooks": [],
         "afterHooks": [],
         "tests": [],
         "suites": [
           {
-            "uuid": "096ffed6-84de-4e43-8c44-55a1ae86793d",
+            "uuid": "e1553b9b-ec20-4db3-bafa-90c89de6944e",
             "title": "c2f",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -214,24 +227,26 @@
                 "fullTitle": "HomebrewLib conversion functions: c2f should return a number",
                 "timedOut": false,
                 "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.c2f).to.be.a('function');\nconst celsius = 30.35; // Just a random value\nconst fahrenheit = homebrewlib.c2f(celsius);\nprint('celsius', 'fahrenheit', celsius, fahrenheit);\nexpect(fahrenheit).to.be.a('number');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:147:37)"
+                },
                 "isRoot": false,
-                "uuid": "6d7d6583-e4ba-42da-ac2e-d5d72f9d3f27",
+                "uuid": "5e205f21-707f-4971-af63-11c14b13a1aa",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "6d7d6583-e4ba-42da-ac2e-d5d72f9d3f27"
+            "passes": [],
+            "failures": [
+              "5e205f21-707f-4971-af63-11c14b13a1aa"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
             "duration": 0,
@@ -240,9 +255,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "97597c1e-0203-4e2d-8e44-6bff778ba672",
+            "uuid": "47749287-d397-49c4-8de9-b212d3d1313f",
             "title": "f2c",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -252,24 +267,26 @@
                 "fullTitle": "HomebrewLib conversion functions: f2c should return a number",
                 "timedOut": false,
                 "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.f2c).to.be.a('function');\nconst fahrenheit = 39.45; // Just a random value\nconst celsius = homebrewlib.f2c(fahrenheit);\nprint('fahrenheit', 'celsius', fahrenheit, celsius);\nexpect(celsius).to.be.a('number');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:156:37)"
+                },
                 "isRoot": false,
-                "uuid": "70541525-c169-40ad-9ff1-0ac2134d7ad2",
+                "uuid": "7904f2a6-85e7-4605-88ac-04a84e162132",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "70541525-c169-40ad-9ff1-0ac2134d7ad2"
+            "passes": [],
+            "failures": [
+              "7904f2a6-85e7-4605-88ac-04a84e162132"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
             "duration": 0,
@@ -278,9 +295,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "52e62489-6d28-4f43-9229-0307ce60083a",
+            "uuid": "6e9bf831-aeab-429f-9e86-3265f8f84dfe",
             "title": "l2gal",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -290,24 +307,26 @@
                 "fullTitle": "HomebrewLib conversion functions: l2gal should return a number",
                 "timedOut": false,
                 "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.l2gal).to.be.a('function');\nconst litres = 8.54; // Just a random value\nconst gallons = homebrewlib.l2gal(litres);\nprint('litres', 'gallons', litres, gallons);\nexpect(gallons).to.be.a('number');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:165:39)"
+                },
                 "isRoot": false,
-                "uuid": "0b72e682-f3bd-4cf2-9b80-4b023735b89d",
+                "uuid": "0828ccaf-5e5c-45b0-864f-3057cb7a4c1b",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "0b72e682-f3bd-4cf2-9b80-4b023735b89d"
+            "passes": [],
+            "failures": [
+              "0828ccaf-5e5c-45b0-864f-3057cb7a4c1b"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
             "duration": 0,
@@ -316,9 +335,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "b2a0ad3d-514b-4b13-b6cc-861c8bbe0683",
+            "uuid": "70708705-4275-4ce8-8840-31f08cf6db94",
             "title": "gal2l",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -328,24 +347,26 @@
                 "fullTitle": "HomebrewLib conversion functions: gal2l should return a number",
                 "timedOut": false,
                 "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.gal2l).to.be.a('function');\nconst gallons = 5.1; // Just a random value\nconst litres = homebrewlib.gal2l(gallons);\nprint('gallons', 'litres', litres, gallons);\nexpect(litres).to.be.a('number');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:174:39)"
+                },
                 "isRoot": false,
-                "uuid": "c5f1091e-7335-40d5-acc4-2d820e9c897a",
+                "uuid": "1433ef21-13f1-42e8-aa9b-98aff9ab1f03",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "c5f1091e-7335-40d5-acc4-2d820e9c897a"
+            "passes": [],
+            "failures": [
+              "1433ef21-13f1-42e8-aa9b-98aff9ab1f03"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
             "duration": 0,
@@ -354,9 +375,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "f5ee336b-b903-4ea4-8008-524ff3ac36ca",
+            "uuid": "dbef18fd-1cf0-4e9c-b2bb-d1674d72e223",
             "title": "oz2g",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -365,36 +386,38 @@
                 "title": "should return a number",
                 "fullTitle": "HomebrewLib conversion functions: oz2g should return a number",
                 "timedOut": false,
-                "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "duration": 1,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.oz2g).to.be.a('function');\nconst oz = 5.1; // Just a random value\nconst gram = homebrewlib.oz2g(oz);\nprint('oz', 'gram', oz, gram);\nexpect(gram).to.be.a('number');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:183:38)"
+                },
                 "isRoot": false,
-                "uuid": "28658692-6579-4607-bce0-717f0f29c3cc",
+                "uuid": "a7fef77f-686c-4172-9dff-8a368cf58dac",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "28658692-6579-4607-bce0-717f0f29c3cc"
+            "passes": [],
+            "failures": [
+              "a7fef77f-686c-4172-9dff-8a368cf58dac"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
-            "duration": 0,
+            "duration": 1,
             "root": false,
             "rootEmpty": false,
             "_timeout": 2000
           },
           {
-            "uuid": "cf1262f5-fa7d-4535-809c-a0021d14dbf0",
+            "uuid": "a2232b19-b192-4792-89ab-0bd31de1a9f0",
             "title": "g2oz",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -403,36 +426,38 @@
                 "title": "should return a number",
                 "fullTitle": "HomebrewLib conversion functions: g2oz should return a number",
                 "timedOut": false,
-                "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "duration": 1,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.g2oz).to.be.a('function');\nconst gram = 5.1; // Just a random value\nconst oz = homebrewlib.g2oz(gram);\nprint('gram', 'oz', gram, oz);\nexpect(oz).to.be.a('number');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:192:38)"
+                },
                 "isRoot": false,
-                "uuid": "8e2f8395-f4c3-4dc3-9e8a-a73dbdd5d874",
+                "uuid": "7e3d6297-0428-4913-8cfa-35b8212a1ace",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "8e2f8395-f4c3-4dc3-9e8a-a73dbdd5d874"
+            "passes": [],
+            "failures": [
+              "7e3d6297-0428-4913-8cfa-35b8212a1ace"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
-            "duration": 0,
+            "duration": 1,
             "root": false,
             "rootEmpty": false,
             "_timeout": 2000
           },
           {
-            "uuid": "ddcc4d16-e537-48e2-85d8-2b69fb7740f4",
+            "uuid": "ae0e3b92-f465-41e5-9706-e7dcdfe6f4b9",
             "title": "lbs2kg",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -442,24 +467,26 @@
                 "fullTitle": "HomebrewLib conversion functions: lbs2kg should return a number",
                 "timedOut": false,
                 "duration": 1,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.lbs2kg).to.be.a('function');\nconst pound = 5.1; // Just a random value\nconst kilogram = homebrewlib.lbs2kg(pound);\nprint('pound', 'kilogram', pound, kilogram);\nexpect(kilogram).to.be.a('number');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:201:40)"
+                },
                 "isRoot": false,
-                "uuid": "2a991fd6-8251-40f6-a104-6666831238ec",
+                "uuid": "47c00948-b79e-4cd4-9e67-99b6fc224ae7",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "2a991fd6-8251-40f6-a104-6666831238ec"
+            "passes": [],
+            "failures": [
+              "47c00948-b79e-4cd4-9e67-99b6fc224ae7"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
             "duration": 1,
@@ -468,9 +495,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "3818e054-1ea7-4d89-a41d-216d4c33af46",
+            "uuid": "6be5eaf4-6dce-4556-acb4-12cc6bd77c8e",
             "title": "kg2lbs",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -480,24 +507,26 @@
                 "fullTitle": "HomebrewLib conversion functions: kg2lbs should return a number",
                 "timedOut": false,
                 "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.kg2lbs).to.be.a('function');\nconst kilogram = 5.1; // Just a random value\nconst pound = homebrewlib.kg2lbs(kilogram);\nprint('kilogram', 'pound', kilogram, pound);\nexpect(pound).to.be.a('number');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:210:40)"
+                },
                 "isRoot": false,
-                "uuid": "105fff99-2941-4a04-987a-5250d31a445b",
+                "uuid": "5ee5faa4-5e42-4f74-bc6a-81c8b7cf16dd",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "105fff99-2941-4a04-987a-5250d31a445b"
+            "passes": [],
+            "failures": [
+              "5ee5faa4-5e42-4f74-bc6a-81c8b7cf16dd"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
             "duration": 0,
@@ -506,9 +535,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "be342374-cbdc-4a2b-89f0-a28aff94e9e7",
+            "uuid": "51bf2ffd-ab44-4e30-a355-025f7c515215",
             "title": "obrix2sg",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -518,24 +547,26 @@
                 "fullTitle": "HomebrewLib conversion functions: obrix2sg should return a number",
                 "timedOut": false,
                 "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.obrix2sg).to.be.a('function');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:222:42)"
+                },
                 "isRoot": false,
-                "uuid": "5176af2d-ed6c-43f0-9738-2c308038cbda",
+                "uuid": "ca2b1999-99c3-4d9c-99c3-df92138b20f4",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "5176af2d-ed6c-43f0-9738-2c308038cbda"
+            "passes": [],
+            "failures": [
+              "ca2b1999-99c3-4d9c-99c3-df92138b20f4"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
             "duration": 0,
@@ -544,9 +575,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "e57d2017-3edd-4a40-aea0-3f43415f561d",
+            "uuid": "11dcbe07-8b3d-464e-afbc-1116bc9cb77d",
             "title": "fbrix2sg",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -555,36 +586,38 @@
                 "title": "should return a number",
                 "fullTitle": "HomebrewLib conversion functions: fbrix2sg should return a number",
                 "timedOut": false,
-                "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "duration": 2,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.fbrix2sg).to.be.a('function');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:230:42)"
+                },
                 "isRoot": false,
-                "uuid": "8f57500e-bedc-4e1d-af70-63902ca919a5",
+                "uuid": "4a8c7cb7-67db-4ce3-96bb-8c8a500df2a3",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "8f57500e-bedc-4e1d-af70-63902ca919a5"
+            "passes": [],
+            "failures": [
+              "4a8c7cb7-67db-4ce3-96bb-8c8a500df2a3"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
-            "duration": 0,
+            "duration": 2,
             "root": false,
             "rootEmpty": false,
             "_timeout": 2000
           },
           {
-            "uuid": "77a1ab73-9097-45cb-8249-f09f12fc8a5d",
+            "uuid": "3c7c5b62-7a15-48f7-a63a-23db9a51a987",
             "title": "get_ABW",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -594,24 +627,26 @@
                 "fullTitle": "HomebrewLib conversion functions: get_ABW should return a number",
                 "timedOut": false,
                 "duration": 1,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.get_ABW).to.be.a('function');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:238:41)"
+                },
                 "isRoot": false,
-                "uuid": "793e3232-a4ed-4433-bb14-359882c86807",
+                "uuid": "3b6cd88c-c2d2-4d27-931a-54ff461c992d",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "793e3232-a4ed-4433-bb14-359882c86807"
+            "passes": [],
+            "failures": [
+              "3b6cd88c-c2d2-4d27-931a-54ff461c992d"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
             "duration": 1,
@@ -620,9 +655,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "f44ebd83-fbf7-46d7-b68b-5904a2027ccc",
+            "uuid": "de9139f0-6bb1-4ac1-8417-8429123e7395",
             "title": "ABW2ABV",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -632,24 +667,26 @@
                 "fullTitle": "HomebrewLib conversion functions: ABW2ABV should return a number",
                 "timedOut": false,
                 "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.ABW2ABV).to.be.a('function');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:246:41)"
+                },
                 "isRoot": false,
-                "uuid": "a05b22c5-012a-4828-ab00-0f148a17b29c",
+                "uuid": "240da783-f346-4ffe-8470-5a72cf7712f0",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "a05b22c5-012a-4828-ab00-0f148a17b29c"
+            "passes": [],
+            "failures": [
+              "240da783-f346-4ffe-8470-5a72cf7712f0"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
             "duration": 0,
@@ -658,9 +695,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "7f60187c-2602-42e7-a106-c2e8801ade55",
+            "uuid": "44f5520c-4144-4771-8435-8fd9cfa0f8d6",
             "title": "get_attenuation",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -670,24 +707,26 @@
                 "fullTitle": "HomebrewLib conversion functions: get_attenuation should return a number",
                 "timedOut": false,
                 "duration": 0,
-                "state": "passed",
-                "speed": "fast",
-                "pass": true,
-                "fail": false,
+                "state": "failed",
+                "pass": false,
+                "fail": true,
                 "pending": false,
                 "code": "expect(homebrewlib.get_attenuation).to.be.a('function');",
-                "err": {},
+                "err": {
+                  "message": "AssertionError: expected undefined to be a function",
+                  "estack": "AssertionError: expected undefined to be a function\n    at Context.it (test/index.js:254:49)"
+                },
                 "isRoot": false,
-                "uuid": "38ef4431-6663-4b07-9fb9-14e608cac0a1",
+                "uuid": "a5c87ab1-fbe4-4218-b746-1e27b306b558",
                 "isHook": false,
                 "skipped": false
               }
             ],
             "suites": [],
-            "passes": [
-              "38ef4431-6663-4b07-9fb9-14e608cac0a1"
+            "passes": [],
+            "failures": [
+              "a5c87ab1-fbe4-4218-b746-1e27b306b558"
             ],
-            "failures": [],
             "pending": [],
             "skipped": [],
             "duration": 0,
@@ -706,18 +745,18 @@
         "_timeout": 2000
       },
       {
-        "uuid": "453f3b78-c63e-4cd5-9d9d-57ce54da8c6d",
+        "uuid": "0ce00cd5-060c-410b-9db4-c054e8e896f7",
         "title": "HomebrewLib recipe management functions:",
-        "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+        "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
         "file": "/test/index.js",
         "beforeHooks": [],
         "afterHooks": [],
         "tests": [],
         "suites": [
           {
-            "uuid": "5b8c3fde-6e0f-4aca-8f47-5bb52b94a65f",
+            "uuid": "752a9b82-016d-4125-a426-2da00c5f7e7f",
             "title": "merge function",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -733,7 +772,7 @@
                 "code": "",
                 "err": {},
                 "isRoot": false,
-                "uuid": "6766a08e-383c-46a9-8689-d36bd9e36f6b",
+                "uuid": "1750f767-93fd-4e02-8240-d3df8c18529d",
                 "isHook": false,
                 "skipped": false
               }
@@ -742,7 +781,7 @@
             "passes": [],
             "failures": [],
             "pending": [
-              "6766a08e-383c-46a9-8689-d36bd9e36f6b"
+              "1750f767-93fd-4e02-8240-d3df8c18529d"
             ],
             "skipped": [],
             "duration": null,
@@ -751,9 +790,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "37322ca6-0384-479b-942c-03da9af17ae9",
+            "uuid": "29f0a3e1-aa77-4d63-85c1-eae90a07a1f5",
             "title": "reset function",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -769,7 +808,7 @@
                 "code": "",
                 "err": {},
                 "isRoot": false,
-                "uuid": "6f1a3259-503d-445e-88ad-6a389e5aea98",
+                "uuid": "c59681de-f3c3-4b22-bfb3-97c340d09dc4",
                 "isHook": false,
                 "skipped": false
               }
@@ -778,7 +817,7 @@
             "passes": [],
             "failures": [],
             "pending": [
-              "6f1a3259-503d-445e-88ad-6a389e5aea98"
+              "c59681de-f3c3-4b22-bfb3-97c340d09dc4"
             ],
             "skipped": [],
             "duration": null,
@@ -787,9 +826,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "5d110988-331a-4700-bc06-d0098c36b277",
+            "uuid": "cbf00b99-af6c-4643-b7f5-5d4193a8b172",
             "title": "split function",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -805,7 +844,7 @@
                 "code": "",
                 "err": {},
                 "isRoot": false,
-                "uuid": "7a699aac-1e23-4dc3-a39c-4355f9ea37d3",
+                "uuid": "3e55a600-83d2-43b4-adeb-951b94093dc3",
                 "isHook": false,
                 "skipped": false
               }
@@ -814,7 +853,7 @@
             "passes": [],
             "failures": [],
             "pending": [
-              "7a699aac-1e23-4dc3-a39c-4355f9ea37d3"
+              "3e55a600-83d2-43b4-adeb-951b94093dc3"
             ],
             "skipped": [],
             "duration": null,
@@ -823,9 +862,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "d021ce4d-64d2-431d-8d83-69631b501f1c",
+            "uuid": "fe4d349a-3eba-4a16-a391-a29b21067629",
             "title": "undo function",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -841,7 +880,7 @@
                 "code": "",
                 "err": {},
                 "isRoot": false,
-                "uuid": "30ffb438-67bd-4ffe-8381-d87d9a3dd165",
+                "uuid": "e13ec1be-a055-4587-b2d3-0bc1c52b86b2",
                 "isHook": false,
                 "skipped": false
               }
@@ -850,7 +889,7 @@
             "passes": [],
             "failures": [],
             "pending": [
-              "30ffb438-67bd-4ffe-8381-d87d9a3dd165"
+              "e13ec1be-a055-4587-b2d3-0bc1c52b86b2"
             ],
             "skipped": [],
             "duration": null,
@@ -869,18 +908,18 @@
         "_timeout": 2000
       },
       {
-        "uuid": "8225b58d-5d06-4575-9996-b66b544acb76",
+        "uuid": "9b5475d2-27e0-44ec-88a7-9536c5554045",
         "title": "HomebrewLib beer production functions:",
-        "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+        "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
         "file": "/test/index.js",
         "beforeHooks": [],
         "afterHooks": [],
         "tests": [],
         "suites": [
           {
-            "uuid": "17cddf03-37aa-4dcc-ab39-cf59b76ec66a",
+            "uuid": "1399faea-5819-4058-a297-bf532c7f59ec",
             "title": "add_water function",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -896,7 +935,7 @@
                 "code": "",
                 "err": {},
                 "isRoot": false,
-                "uuid": "6a035079-68d6-493e-88bc-0cced21433c9",
+                "uuid": "b4356567-a506-4383-af5c-d6af8f0ee7bd",
                 "isHook": false,
                 "skipped": false
               }
@@ -905,7 +944,7 @@
             "passes": [],
             "failures": [],
             "pending": [
-              "6a035079-68d6-493e-88bc-0cced21433c9"
+              "b4356567-a506-4383-af5c-d6af8f0ee7bd"
             ],
             "skipped": [],
             "duration": null,
@@ -914,9 +953,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "a7ac75d5-326b-4a0d-8bf7-22977ca8914c",
+            "uuid": "954188c6-5a4e-49c8-ace2-401a4e17b810",
             "title": "add_sugar function",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -932,7 +971,7 @@
                 "code": "",
                 "err": {},
                 "isRoot": false,
-                "uuid": "3e10dfe4-fb4c-41cb-896d-560ea7a6a617",
+                "uuid": "fb33d63d-3777-455a-893d-b2543f386007",
                 "isHook": false,
                 "skipped": false
               }
@@ -941,7 +980,7 @@
             "passes": [],
             "failures": [],
             "pending": [
-              "3e10dfe4-fb4c-41cb-896d-560ea7a6a617"
+              "fb33d63d-3777-455a-893d-b2543f386007"
             ],
             "skipped": [],
             "duration": null,
@@ -950,9 +989,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "1dd7e957-4db9-4959-9123-181dd9700eca",
+            "uuid": "00d7ee0e-a869-4fe0-ac4f-6fe4fec24f1b",
             "title": "boil function",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -968,7 +1007,7 @@
                 "code": "",
                 "err": {},
                 "isRoot": false,
-                "uuid": "1b99ceb9-0f42-47be-915f-5fe675c0693d",
+                "uuid": "d18373d3-2bfb-488a-879a-2ee0e3d60754",
                 "isHook": false,
                 "skipped": false
               }
@@ -977,7 +1016,7 @@
             "passes": [],
             "failures": [],
             "pending": [
-              "1b99ceb9-0f42-47be-915f-5fe675c0693d"
+              "d18373d3-2bfb-488a-879a-2ee0e3d60754"
             ],
             "skipped": [],
             "duration": null,
@@ -986,9 +1025,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "4d2bdc95-eaa3-47c8-945a-abd91cfbfe5e",
+            "uuid": "1a74361d-3177-48c8-bd20-e7246ee7e29b",
             "title": "brew function",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -1004,7 +1043,7 @@
                 "code": "",
                 "err": {},
                 "isRoot": false,
-                "uuid": "3e5ba4db-4d95-4039-82ed-f589bbbb7fe9",
+                "uuid": "3a592c6a-9aa8-46f4-a38e-8e222f5b62d7",
                 "isHook": false,
                 "skipped": false
               }
@@ -1013,7 +1052,7 @@
             "passes": [],
             "failures": [],
             "pending": [
-              "3e5ba4db-4d95-4039-82ed-f589bbbb7fe9"
+              "3a592c6a-9aa8-46f4-a38e-8e222f5b62d7"
             ],
             "skipped": [],
             "duration": null,
@@ -1022,9 +1061,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "10bf4a29-1033-4431-916c-106150c45f73",
+            "uuid": "b3fb845f-5567-45bc-8e64-0500f498bd12",
             "title": "bottle function",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -1040,7 +1079,7 @@
                 "code": "",
                 "err": {},
                 "isRoot": false,
-                "uuid": "e4fe326b-9d15-4b14-8737-b06f791edba1",
+                "uuid": "2d8f54cb-e6b2-457f-b6af-cd53b40aceb4",
                 "isHook": false,
                 "skipped": false
               }
@@ -1049,7 +1088,7 @@
             "passes": [],
             "failures": [],
             "pending": [
-              "e4fe326b-9d15-4b14-8737-b06f791edba1"
+              "2d8f54cb-e6b2-457f-b6af-cd53b40aceb4"
             ],
             "skipped": [],
             "duration": null,
@@ -1058,9 +1097,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "6ca08280-c45d-474a-bca6-7bc0f877fd48",
+            "uuid": "4320c2b5-4fd8-4cd5-b8f9-e90362a048f4",
             "title": "ferment function",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -1076,7 +1115,7 @@
                 "code": "",
                 "err": {},
                 "isRoot": false,
-                "uuid": "336112a5-020b-4964-98be-202f5891cd4b",
+                "uuid": "37d31e63-e170-4c2b-aa33-404a8d4adeb7",
                 "isHook": false,
                 "skipped": false
               }
@@ -1085,7 +1124,7 @@
             "passes": [],
             "failures": [],
             "pending": [
-              "336112a5-020b-4964-98be-202f5891cd4b"
+              "37d31e63-e170-4c2b-aa33-404a8d4adeb7"
             ],
             "skipped": [],
             "duration": null,
@@ -1094,9 +1133,9 @@
             "_timeout": 2000
           },
           {
-            "uuid": "674138aa-5185-407e-8819-859dacb28cd8",
+            "uuid": "0cbd1c24-709f-4e30-9bb9-39ece7588f64",
             "title": "mash function",
-            "fullFile": "/home/federico/Documents/Polimi/homebrewlib/test/index.js",
+            "fullFile": "/Users/floriandaniel/OneDrive - Politecnico di Milano/HomebrewLab/homebrewlib/test/index.js",
             "file": "/test/index.js",
             "beforeHooks": [],
             "afterHooks": [],
@@ -1112,7 +1151,7 @@
                 "code": "",
                 "err": {},
                 "isRoot": false,
-                "uuid": "f732e52a-317c-4097-a341-1903e8ef88ad",
+                "uuid": "01eeb440-1587-4eb4-9bdc-b4a97eaa62de",
                 "isHook": false,
                 "skipped": false
               }
@@ -1121,7 +1160,7 @@
             "passes": [],
             "failures": [],
             "pending": [
-              "f732e52a-317c-4097-a341-1903e8ef88ad"
+              "01eeb440-1587-4eb4-9bdc-b4a97eaa62de"
             ],
             "skipped": [],
             "duration": null,

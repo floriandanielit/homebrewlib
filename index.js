@@ -58,13 +58,13 @@ function Recipe() {
   };
 
   // add mash step to model
-  this.add_mash = function (position = -1) {
-
-    if (position < -1 || position >= this.process.length) {
-      console.log("Illegal position for current model."); return; }
+  this.add_mash = function (position) {
 
     // add  activity either at position or at the end of the current process
-    if (position == -1) position = this.process.length;
+    if (typeof position === 'undefined') // assign default value
+      position = this.process.length;
+    else if (position < -1 || position >= this.process.length) {
+      console.log("Illegal position for current model."); return; }
 
     var efficiency_weight = 0.0; // percentage in decimal points, e.g., 70% = 0.70
     var loss = 0.0; // loss of wort at end of mashing in liters
@@ -90,13 +90,13 @@ function Recipe() {
   };
 
   // add boil step to model
-  this.add_boil = function (position = -1) {
-
-    if (position < -1 || position >= this.process.length) {
-      console.log("Illegal position for current model."); return; }
+  this.add_boil = function (position) {
 
     // add  activity either at position or at the end of the current process
-    if (position == -1) position = this.process.length;
+    if (typeof position === 'undefined') // assign default value
+      position = this.process.length;
+    else if (position < -1 || position >= this.process.length) {
+      console.log("Illegal position for current model."); return; }
 
     var evaporation_rate = 0.0; // liters per hour
     var boil_loss = 0; // loss in liters
@@ -127,13 +127,13 @@ function Recipe() {
 };
 
   // add fermentation step to model
-  this.add_ferment = function (position = -1) {
-
-    if (position < -1 || position >= this.process.length) {
-      console.log("Illegal position for current model."); return; }
+  this.add_ferment = function (position) {
 
     // add  activity either at position or at the end of the current process
-    if (position == -1) position = this.process.length;
+    if (typeof position === 'undefined') // assign default value
+      position = this.process.length;
+    else if (position < -1 || position >= this.process.length) {
+      console.log("Illegal position for current model."); return; }
 
     var loss = 0.0; // loss in liters
 
@@ -158,13 +158,13 @@ function Recipe() {
   };
 
   // add bottling step to model
-  this.add_bottle = function (position = -1) {
-
-    if (position < -1 || position >= this.process.length) {
-      console.log("Illegal position for current model."); return; }
+  this.add_bottle = function (position) {
 
     // add  activity either at position or at the end of the current process
-    if (position == -1) position = this.process.length;
+    if (typeof position === 'undefined') // assign default value
+      position = this.process.length;
+    else if (position < -1 || position >= this.process.length) {
+      console.log("Illegal position for current model."); return; }
 
     this.process.splice (position, 0, // add description of production activity
     {
@@ -184,7 +184,7 @@ function Recipe() {
 
     if (!target_recipe) {
       console.log("No target recipe specified."); return; }
-    if (position < 0 || position >= this.process.length) {
+    if (typeof position === 'undefined' || position < 0 || position >= this.process.length) {
       console.log("Illegal position of split in source recipe."); return; }
     if (this.process[position].type != "flow") {
       console.log("Source node to be split is not a flow node."); return; }
@@ -222,9 +222,9 @@ function Recipe() {
 
     if (!target_recipe) {
       console.log("No target recipe specified."); return; }
-    if (source_position < 0 || source_position >= this.process.length) {
+    if (typeof source_position === 'undefined' || source_position < 0 || source_position >= this.process.length) {
       console.log("Illegal position of merge in source recipe."); return; }
-    if (target_position < 0 || target_position >= target_recipe.process.length) {
+    if (typeof target_position === 'undefined' || target_position < 0 || target_position >= target_recipe.process.length) {
       console.log("Illegal position of merge in target recipe."); return; }
     if (this.process[source_position].type != "flow") {
       console.log("Source node to be merged is not a flow node."); return; }
@@ -264,7 +264,7 @@ function Recipe() {
   // deletes an activity from the recipe
   this.delete = function (position) {
 
-    if (position < 0 || position >= this.process.length) {
+    if (typeof position === 'undefined' || position < 0 || position >= this.process.length) {
       console.log("Illegal position for current recipe."); return; }
     if (this.process[position].type != "activity") {
       console.log("Position must point an activity node."); return; }
@@ -287,17 +287,14 @@ function Recipe() {
 };
 
 
-
 module.exports = {
 
-  conversion : conv,
-  constants  : constants,
-  equipment  : equipment,
+  conversion : conv,        // generic brewing-related conversion functions
+  constants  : constants,   // generic brewing constants
+  equipment  : equipment,   // example configuration of brew equipment
 
-  // returns a recipe object to work with
-  newRecipe : function () {
-    return new Recipe();
-  }
+  newRecipe : function () { // returns the recipe object to work with
+    return new Recipe(); }
 
 };
 
