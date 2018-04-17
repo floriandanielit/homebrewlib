@@ -1,7 +1,9 @@
 # homebrewlib
 A JavaScript library for homebrew recipe calculations.
 
-Hombrewlib is a **model-driven design instrument for beer recipes**. You need to have basic knowledge of brewing, e.g., you are a home or professional brewer, to be able to profitably use the library. If you have this knowledge, the library will provide you with **unprecedented flexibility** in the design of your recipes, compared to conventional brewing software. You can easily set up a brew process in which you diverge from the classical mash-boil-berment-bottle process and, for example, add a double mash step (mash1-mash2-boil-berment-bottle) to make your extra-strong version of a beer where you use the work produced by the first mash step as input of the second mash step. You can also split recipes, process the respective wort differently, and merge the result again. The more creative your are, the more fun it will be.
+Hombrewlib is a **model-driven design instrument for beer recipes**. You need to have basic knowledge of brewing, e.g., you are a home or professional brewer, to be able to profitably use the library. If you have this knowledge, the library will provide you with **unprecedented flexibility** in the design of your recipes, compared to conventional brewing software.
+
+You can easily set up a brew process in which you diverge from the classical mash-boil-ferment-bottle process and, for example, add a double mash step (mash1-mash2-boil-ferment-bottle) to make your extra-strong, triple, imperial version of a beer where you use the wort produced by the first mash step as "mash water" of the second mash step. You can also split recipes, process the respective wort differently, and merge the result again. The more creative your are, the more fun it will be.
 
 **Attention:** The library is still work in progress and may change over the next months.
 
@@ -19,16 +21,16 @@ npm install homebrewlib
 ## In your browser
 
 Include the minified version of the library (`homebrewlib.min.js`) you can
-find in the subfolder `dist` of this module:
+find in the subfolder `dist` of this repository:
 ```
 <script src="homebrewlib.min.js"></script>
 ```
-If you are only interested in using homebrewlib in your browser without modifying its code, you do not need to install the library in node.js. Just download the referenced `homebrewlib.min.js` and add it to the
+If you are only interested in using homebrewlib in your browser without modifying its code, you do not need to install the library using node. Just download the referenced `homebrewlib.min.js` and add it to the
 source files of your application.
 
 
 ## Generate your own browser-friendly version
-If you make changes to the node module, you may want to re-generate a
+If instead you make changes to the node module, you may want to re-generate a
 browser-friently version as well for your personal use.
 You'll need [uglifyjs](https://github.com/mishoo/UglifyJS2) and
 [browserify](http://browserify.org/). If you did not yet install them,
@@ -39,14 +41,14 @@ Now, first **uglify** the library as follows:
 ```
 uglifyjs index.js -o ugly.js
 ```
-`ugly.js` is just a temporary name; you can use here what aver you want,
+`ugly.js` is just a temporary name; you can use here whatever you want,
 as long as you use it also in the next instruction that you'll use to make
 the library ready for your browser, that is you **browserify** it:
 ```
 browserify ugly.js --standalone homebrewlib > homebrewlib.min.js
 ```
 You see, `ugly.js` is the input file we want to process. The option
-`--standalone` makes homebrewlib available in browser through a
+`--standalone` makes homebrewlib available in the browser through a
 global object. `homebrewlib` is the name of the object and `homebrewlib.min.js`
 the name of the JavaScript file to be created. This is the file you can include
 in your HTML code as shown above.
@@ -54,19 +56,21 @@ in your HTML code as shown above.
 
 # Usage: calculating a beer recipe
 
-A beer recipe is expressed by providing (i) the **ingredients** that will go into the beer and (ii) the **brew process** that will use these ingredients and transform water into beer. This is different from how brewing software usually works: there is no need to describe the brewing process, as such is already hard-coded in the software (brew-boil-ferment-bottle); you merely follow this process and configure the ingredients you want to use. Well, the purpose of homebrewlib is exactly the enable you to configure your very own brew process and to get creative with your brewing.
+A beer recipe is expressed by providing (i) the **ingredients** that will go into the beer and (ii) the **brew process** that will use these ingredients and transform water into beer. This is different from how brewing software usually works: there is no need to describe the brewing process, as that is already hard-coded in the software (brew-boil-ferment-bottle); you merely follow this process and configure the ingredients you want to use. Well, the purpose of homebrewlib is exactly to enable you to configure your very own brew process and to get creative with your brewing.
 
-The following line creates an **empty process model**:
+The following lines creates an **empty process model**:
 
 ```
 var hb = require('homebrewlib'); // loads the library
 var recipe = hb.newRecipe();     // creates a new recipe object
 ```
 
+If you work inside your browser and use the browserified version of homebrewlib, after including it in the HTML code of your page you will have a new JavaScript environment variable called ```homebrewlib``` at your disposal. This variable will behave exactly like the variable ```hb``` just created in node. So, consider them interchangeable depending on which environment you are working in.
+
 
 ## Modeling the brew steps
 
-The brew process is configured by assembling a set of brewing activities (also called steps). Process definition starts from an input **flow** (the mash water) to which one can add an **activity** to process it. Adding an activity also adds a new flow to the process model. The flow before the activity represents the water/wort in input to the activity; the flow after the activity represents the water/wort as produced by the activity. Each activity must be configured with the ingredients to use and some process parameters, such as the quantity of sparge water or the boil time. Each activity may be different.
+The brew process is configured by assembling a set of brewing activities (also called steps). Process definition starts from an input **flow** (the mash water) to which one can add an **activity** to process it. Adding an activity also adds a new flow to the process model. The flow before the activity represents the water/wort in input to the activity; the flow after the activity represents the water/wort as produced by the activity. Each activity must be configured with the ingredients to use and some process parameters, such as the quantity of sparge water or the boil time. Each activity may be different. Concrete usage examples are commented in the code.
 
 Let's add a mash and a boil step to the recipe created before and inspect the resulting process model:
 
@@ -91,10 +95,10 @@ var branch = hb.newRecipe(); // create a second recipe for the branch
 
 recipe.split(2, branch); // split in position 2 (after mashing)
 
-branch.add_boil(); // configure you branch like any other recipe
+branch.add_boil(); // configure your branch like any other recipe
 ```
 
-If you have a look at the internal process models of the two recipes, you will see that a new activity Split has been introduced into the model and that the two recipes link each other. The reason for this is that ```branch``` now depends on ```recipe``` for all the activities preceding the Split (depending means its activities and flow are pointer references to the respective activities and flow of ```recipe```). Splitting a recipe works only on flow nodes.
+If you have a look at the internal process models of the two recipes, you will see that a new activity Split has been introduced into the model and that the two recipes link each other. The reason for this is that ```branch``` now depends on ```recipe``` for all the activities preceding the Split (depending means its activities and flows are pointer references to the respective activities and flows of ```recipe```). Splitting a recipe works only on flow nodes.
 
 Similarly, **merging** two recipes requires two flow nodes. If we assume the two recipes ```recipe``` and ```branch``` have been configured with other activities and that we want to merge the flow at position 5 of the latter with the flow at position 7 of the former, we can proceed like this:
 
@@ -102,20 +106,20 @@ Similarly, **merging** two recipes requires two flow nodes. If we assume the two
 branch.merge(5, recipe, 7);
 ```
 
-After this instruction, the ```branch``` will be left with an empty output flow (volume if 0 liters), and ```recipe``` will have increased the volume of its output flow and updated its properties accordingly.
+After this instruction, ```branch``` will be left with an empty output flow (volume of 0 liters), and ```recipe``` will have increased the volume of its output flow and updated its properties accordingly.
 
 
 ## Brewing a recipe
 
-So far, this was all about modeling the production process and setting up each activity with ingredients and configurations. Let's now understand how to actually **brew a recipe**, that is, how to calculate the properties of the final beer given a ready recipe. This is actually very simple:
+So far, this was all about modeling the brewing process and setting up each activity with ingredients and configurations. Let's now understand how to actually **brew a recipe**, that is, how to calculate the properties of the final beer given a ready recipe. This is actually very simple:
 
 ```
 recipe.brew();
 ```
 
-The function ```brew()``` starts from the first flow (the mash water) of the process and incrementally enacts brewing activities, each time updating the respective output flows. If a recipe has a spit, like in the case of ```recipe``` which has a ```branch``` recipe, it is enough to enact the ```brew()``` function on the parent recipe ```recipe``` to brew also all dependent recipes.
+The function ```brew()``` starts from the first flow (the mash water) of the process and incrementally enacts brewing activities, each time updating the respective output flows. If a recipe has a split, like in the case of ```recipe``` which has a ```branch``` recipe, it is enough to enact the ```brew()``` function on the parent recipe ```recipe``` to brew also all dependent recipes.
 
-
+Enacting an activity means calling the actual brew function associated with the activity implemented in the file ```brew.js```. Each activity has an own implementation that processes in the input flow and produces an updated output flow.
 
 
 # Testing
