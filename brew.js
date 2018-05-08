@@ -49,14 +49,14 @@ add_sugar = function (wort, quantity, type) {
   }
 
   var new_sugar = quantity * correction;
-  var total_sugar = wort.vol * wort.og * sg2p(wort.og)/100 + new_sugar;
+  var total_sugar = wort.vol * wort.og * conv.sg2p(wort.og)/100 + new_sugar;
 
   var a = 258.6;
   var b = 227.1/258.2;
   var extract_plato = ( -(a+b*total_sugar*100/wort.vol) +
                       Math.sqrt(Math.pow(a+b*total_sugar*100/wort.vol,2) +
                       4*a*(1-b)*total_sugar*100/wort.vol)) / (2-2*b);
-  var sg = p2sg(extract_plato);
+  var sg = conv.p2sg(extract_plato);
 
   wort.og  = sg;
   wort.fg  = wort.fg;  // tbd
@@ -126,6 +126,8 @@ boil = function (inflow, params, outflow) {
 //              ibu += get_IBU (hop.aa, hop.weight, hop.time, post_boil_volume,
   //                    (wort.og + sg)/2.0, hop.type, hop.after_hot_break);
 
+// take into account WHIRLPOOL!!
+
   outflow.plan = {
     vol  : post_boil_volume - params.boil_loss,
     og   : sg,
@@ -177,7 +179,7 @@ ferment = function (inflow, params, outflow) {
 
   // sugar addition during fermentation
   if (params.sugar_addition.qty)
-    add_sugar(outflow.plan, params.sugar_addition.qty, para.sugar_addition.type);
+    add_sugar(outflow.plan, params.sugar_addition.qty, params.sugar_addition.type);
 };
 
 
@@ -193,10 +195,10 @@ bottle = function (inflow, params, outflow) {
       if (params.prime[i].type == "Extract")
         prime_co2 += params.prime[i].qty * constants.extract_to_CO2_conversion;
       if (params.prime[i].type == "Speise")
-        prime_co2 += 0.5 * params.prime[i].qty * inflow.plan.og * sg2p(inflow.plan.og)*10 *
-                     0.82 * (100 - 100*sg2p(inflow.plan.fg)/sg2p(inflow.plan.og)) /
+        prime_co2 += 0.5 * params.prime[i].qty * inflow.plan.og * conv.sg2p(inflow.plan.og)*10 *
+                     0.82 * (100 - 100*conv.sg2p(inflow.plan.fg)/conv.sg2p(inflow.plan.og)) /
                      (inflow.plan.vol + params.prime[i].qty) / inflow.plan.vol;
-                     // to be fixed: does not yer subtract needed volume from wort volume!
+                     // to be fixed: does not yet subtract needed volume from wort volume!
     }
 
   }
@@ -221,5 +223,6 @@ module.exports = {
   mash    : mash,
   boil    : boil,
   ferment : ferment,
-  bottle  : bottle
+  bottle  : bottle,
+  get_IBU : get_IBU
 };

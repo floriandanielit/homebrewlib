@@ -292,7 +292,8 @@ module.exports = {
   conversion : conv,        // generic brewing-related conversion functions
   constants  : constants,   // generic brewing constants
   equipment  : equipment,   // example configuration of brew equipment
-
+  get_IBU    : brew.get_IBU,
+  
   newRecipe : function () { // returns the recipe object to work with
     return new Recipe(); }
 
