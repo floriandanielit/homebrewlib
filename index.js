@@ -120,6 +120,7 @@ function Recipe() {
         boil_evaporation_rate : evaporation_rate, // liters per hour
         boil_loss : boil_loss, // loss in liters
         whirlpool_loss : whirlpool_loss, // loss of wort in whirlpool
+        speise_volume: 0.0, // possible volume of speise used for priming
       }
     }, flow.create('Post-boil wort'));
 
@@ -145,10 +146,11 @@ function Recipe() {
       name   : "Ferment",
       run    : brew.ferment,
       params : {
-        temperature : 0, // fermentation temperature in °C
+        temperature : 0, // primary fermentation temperature in °C
+        max_temperature : 0, // maximum fermentation temperature in °C
         yeast : { name: 'WYeast London ESB', type : 'liquid', attenuation : 83}, // single yeast per fermentation
         water_addition : 0, // water added during boiling in liters
-        sugar_addition : {qty : 0.0, type : 'Sucrose'}, // sugar additions during boiling in kg
+        sugar_addition : { qty : 0.0, type : 'Sucrose'}, // sugar additions during boiling in kg
         hops : [], // dry hop list with elements like {name : 'EKG', type : 'Pellet', weight : 55, aa : 5.9, time : 60, after_hot_break : true}
         fermentation_loss: loss // loss in liters
       }
@@ -172,6 +174,7 @@ function Recipe() {
       name   : "Bottle",
       run    : brew.bottle,
       params : {
+        bottling_loss: 0.0, // loss of beer during bottling
         prime : [], // priming sugards in g/l ({ type: 'Sucrose', qty: 5.0})
       }
     }, flow.create('Carbonated beer'));
@@ -293,7 +296,7 @@ module.exports = {
   constants  : constants,   // generic brewing constants
   equipment  : equipment,   // example configuration of brew equipment
   get_IBU    : brew.get_IBU,
-  
+
   newRecipe : function () { // returns the recipe object to work with
     return new Recipe(); }
 

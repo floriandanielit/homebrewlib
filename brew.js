@@ -11,15 +11,15 @@ get_attenuation = function (oplato, fplato) {
 // calculates the IBUs for one hop addition according to Tinseth
 // source: http://realbeer.com/hops/research.html
 // example: hop addition with 5.0% AA, 50g, 60mins, 60l, 1.035 SG >> 31 IBUs
-get_IBU = function (aa, weight, minutes, volume, sg, type, after_hot_break) {
+get_IBU = function (aa, weight, minutes, volume, sg, form, usage) {
 
   var alpha_acids = aa/100 * weight * 1000 / volume;
   var bigness_factor = 1.65 * Math.pow( 0.000125, sg-1 );
   var boil_time_factor = (1 - Math.exp(-0.04 * minutes))/4.15;
   var utilization = bigness_factor * boil_time_factor;
   var increment = 1;
-  if (type === 'Pellet') increment += 0.1;
-  if (after_hot_break) increment += 0.1
+  if (form === 'pellet') increment += 0.1;
+  if (usage == "afterhotbreak" || usage == "whirlpool") increment += 0.1
   return alpha_acids * utilization * increment;
 }
 
@@ -120,13 +120,8 @@ boil = function (inflow, params, outflow) {
   // IBUs at end of boil
   var ibu = inflow.plan.ibu;
   for (i=0; i<params.hops.length; i++)
-    ibu += get_IBU (params.hops[i].aa, params.hops[i].weight, params.hops[i].time, post_boil_volume,
-            (inflow.plan.og + sg)/2.0, params.hops[i].type, params.hops[i].after_hot_break);
-//              for (let hop of boil.hops)
-//              ibu += get_IBU (hop.aa, hop.weight, hop.time, post_boil_volume,
-  //                    (wort.og + sg)/2.0, hop.type, hop.after_hot_break);
-
-// take into account WHIRLPOOL!!
+    ibu += get_IBU (params.hops[i].alphaAcids, params.hops[i].weight, params.hops[i].time + params.whirlpool,
+      post_boil_volume, (inflow.plan.og + sg)/2.0, params.hops[i].form, params.hops[i].usage);
 
   outflow.plan = {
     vol  : post_boil_volume - params.boil_loss,
@@ -145,6 +140,10 @@ boil = function (inflow, params, outflow) {
   // sugar addition during boil
   if (params.sugar_addition.qty)
     add_sugar(outflow.plan, params.sugar_addition.qty, params.sugar_addition.type);
+
+    // drop possible wort use for carbonation with speise
+    if (params.speise_volume)
+      outflow.plan.vol -= params.speise_volume;
 };
 
 
@@ -157,11 +156,11 @@ ferment = function (inflow, params, outflow) {
     final_extract -= original_extract * params.yeast.attenuation/100;
   var fg = conv.p2sg(final_extract);
 
-  var co2 = 1.013 * Math.pow(2.71828182845904, -10.73797+2617.25/(params.temperature+273.15)) * 10;
+  var co2 = 1.013 * Math.pow(2.71828182845904, -10.73797+2617.25/(params.max_temperature+273.15)) * 10;
 
   // source: http://www.cotubrewing.com/homebrewing/alcohol-content-formula/
   var abv = (1.05/0.79) * ((inflow.plan.og - fg) / fg) * 100;
-  if (abv < 0) abv = 0;
+  if (abv < 0) abv = 0.0;
 
   outflow.plan = {
     vol  : inflow.plan.vol - params.fermentation_loss,
@@ -185,30 +184,38 @@ ferment = function (inflow, params, outflow) {
 
 bottle = function (inflow, params, outflow) {
 
-  var prime_co2 = 0;
+  var prime_co2 = 0.0;
+  var speise_volume = 0.0;
+  var prime_abw = 0.0
+
   if (params.prime) {
     for (var i = 0; i < params.prime.length; i++) {
-      if (params.prime[i].type == "Sucrose")
+
+      if (params.prime[i].type == "Sucrose") {
         prime_co2 += params.prime[i].qty * constants.sucrose_to_CO2_conversion;
-      if (params.prime[i].type == "Dextrose")
+        prime_abw += params.prime[i].qty * (1 - constants.sucrose_to_CO2_conversion);
+      }
+      if (params.prime[i].type == "Dextrose") {
         prime_co2 += params.prime[i].qty * constants.dextrose_to_CO2_conversion;
-      if (params.prime[i].type == "Extract")
+        prime_abw += params.prime[i].qty * (1 - constants.sucrose_to_CO2_conversion);
+      }
+      if (params.prime[i].type == "Extract") {
         prime_co2 += params.prime[i].qty * constants.extract_to_CO2_conversion;
-      if (params.prime[i].type == "Speise")
-        prime_co2 += 0.5 * params.prime[i].qty * inflow.plan.og * conv.sg2p(inflow.plan.og)*10 *
-                     0.82 * (100 - 100*conv.sg2p(inflow.plan.fg)/conv.sg2p(inflow.plan.og)) /
-                     (inflow.plan.vol + params.prime[i].qty) / inflow.plan.vol;
-                     // to be fixed: does not yet subtract needed volume from wort volume!
+        prime_abw += params.prime[i].qty * (1 - constants.sucrose_to_CO2_conversion);
+      }
+      if (params.prime[i].type == "Speise") {
+        speise_volume = params.prime[i].qty;
+        prime_co2 += 0.5 * 0.82 * speise_volume * inflow.plan.og * conv.sg2p(inflow.plan.og)*10 *
+                   (inflow.plan.og - inflow.plan.fg) / (inflow.plan.og -1) /
+                   (inflow.plan.vol + speise_volume);
+      }
     }
-
   }
-  // todo: add volume of possible priming solutions
 
-/////// WRONG FORMULA!!
-  var prime_abv = (prime_co2 * 51/49) / inflow.plan.vol / 0.794 / 10;
+  var prime_abv = prime_abw / 0.794 / 10;
 
   outflow.plan = {
-    vol : inflow.plan.vol,
+    vol : inflow.plan.vol - params.bottling_loss + speise_volume,
     og  : inflow.plan.og,
     fg  : inflow.plan.fg,
     abv : inflow.plan.abv + prime_abv,
