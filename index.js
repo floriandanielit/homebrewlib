@@ -192,13 +192,16 @@ function Recipe() {
     if (this.process[position].type != "flow") {
       console.log("Source node to be split is not a flow node."); return; }
 
+//    let targets = [];
+//    targets.push(target_recipe);
+
     this.process.splice (position+1, 0,
     {
       type   : "activity",
       name   : "Split",
       run    : flow.split,
       params : {
-        target_recipe : target_recipe,
+        target_recipe : ,
         vol : 0
       }
     }, flow.create('Split flow'));
@@ -272,7 +275,7 @@ function Recipe() {
     if (this.process[position].type != "activity") {
       console.log("Position must point an activity node."); return; }
 
-    this.process.splice (position, 2);
+    this.process.splice (position, this.process.length - position);
   }
 
   // brews the recipe according to its configuration
