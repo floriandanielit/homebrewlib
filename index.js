@@ -201,7 +201,7 @@ function Recipe() {
       name   : "Split",
       run    : flow.split,
       params : {
-        target_recipe : ,
+        target_recipe : target_recipe,
         vol : 0
       }
     }, flow.create('Split flow'));
@@ -275,7 +275,7 @@ function Recipe() {
     if (this.process[position].type != "activity") {
       console.log("Position must point an activity node."); return; }
 
-    this.process.splice (position, this.process.length - position);
+    this.process.splice (position, 2);
   }
 
   // brews the recipe according to its configuration
