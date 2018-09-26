@@ -244,6 +244,8 @@ function Recipe() {
       run    : flow.merge,
       params : {
         source_flow : null,
+        target_process : target_recipe,
+        target_position : target_position + 1
       }
     }, flow.create('Empty flow'));
 
@@ -275,6 +277,8 @@ function Recipe() {
     if (this.process[position].type != "activity") {
       console.log("Position must point an activity node."); return; }
 
+    if (this.process[position].params.target_process)
+      this.process[position].params.target_process.delete(this.process[position].params.target_position);
     this.process.splice (position, 2);
   }
 
