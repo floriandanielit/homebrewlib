@@ -1,19 +1,16 @@
 /* homebrewlib
 
-A beer recipe is a process model that represents the respective brewing process.
-The process model contains:
+A beer recipe is a workflow model that represents the respective brewing process.
+The model contains:
 - flows (the water/wort being transformed) and
 - activities (the brewing activities transforming the wort).
 An empty process model contains at least one initial flow of water, the mash water.
-Adding a new activity also adds a respective output flow.
-Activities can be configured using the params property; the run propert links the respective brewing logic.
-The funciton brew() traverses the process model from the start and runs all calculations
+Adding a new activity also adds a respective outflow.
+Activities can be configured using the params property; the run property links the respective brewing logic.
+The funciton brew() traverses the model from the start and runs all calculations.
 
 */
 
-
-// @todo: this file can be re-written using the new ECMAScript6 syntax, and transpiled using babel to ensure compatibily with older browser
-// @todo: even though ECMA6 is already compatible with almost everything except Internet Explorer 11 (of course...)
 
 var constants = require('./constants.js');
 var conv      = require('./conversions.js');
@@ -23,21 +20,21 @@ var flow      = require('./flow.js');
 
 
 
-
 // beer recipe object. allows construction of brewing process model
 function Recipe() {
 
   this.equipment = {}; // brew equipment properties
 
-  this.process = []; // starting process model
+  this.process = []; // empty process model
   this.process[0] = flow.create('Mash water');
-
 
   // configure brew equipment
   this.set_equipment = function (equipment) {
 
-    this.equipment = JSON.parse(JSON.stringify(equipment)); // copy by value
+    // copy equipment provided as input by value
+    this.equipment = JSON.parse(JSON.stringify(equipment));
 
+    // update equipment properties in existing activities // DROP ALL ACTIVITY-SPECIFIC EQUIPMENT PROPERTIES???
     for (i=0; i<this.process.length; i++)
       if (this.process[i].type == "activity")
         if (this.process[i].name == "Mash") {
@@ -47,7 +44,6 @@ function Recipe() {
         else if (this.process[i].name == "Boil") {
           this.process[i].params.boil_evaporation_rate = equipment.boil_evaporation_rate;
           this.process[i].params.boil_loss = equipment.boil_loss;
-          this.process[i].params.whirlpool_loss = equipment.whirlpool_loss;
         }
         else if (this.process[i].name == "Ferment") {
           this.process[i].params.fermentation_loss = equipment.fermentation_loss;
