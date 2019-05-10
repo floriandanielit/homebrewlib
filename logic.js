@@ -21,7 +21,7 @@ get_ibu = function (alpha, weight, minutes, volume, sg, form, usage) {
   var utilization = bigness_factor * boil_time_factor;
 
   var increment = 1.0;
-  if (form === 'pellet') increment += 0.1;
+  if (form === 'pellets') increment += 0.1;
   if (usage === "after hot break") increment += 0.1 // CHECK WHIRLPOOL HERE
 
   return alpha_acids * utilization * increment;
@@ -43,13 +43,16 @@ add_water = function (wort, water_addition) {
 }
 
 
+// sugar additions prior to priming and final fermentation
 add_sugar = function (wort, quantity, type) {
 
-  var correction = 1.0; // correction compared to spure sucrose
+  // pure sucrose has a correction factor of 1 (it's the reference)
+  var correction = 1.0;
+  // corrections for dextrose and dry malt extract (DME)
+  // Source: https://www.brewersfriend.com/beer-priming-calculator/
   switch (type) {
-    case 'Dextrose'            : correction = 1.0; /// TBD !!!!
-    case 'Dry malt extract'    : correction = 1.0;
-    case 'Liquid malt extract' : correction = 1.0;
+    case 'dextrose'            : correction = 0.91;
+    case 'dry malt extract'    : correction = 0.68;
   }
 
   var new_sugar = quantity * correction;
@@ -63,9 +66,9 @@ add_sugar = function (wort, quantity, type) {
   var sg = conv.p2sg(extract_plato);
 
   wort.og  = sg;
-  wort.fg  = wort.fg;  // tbd
-  wort.abv = wort.abv; // tbd
-  wort.ebc = wort.ebc; // tbd
+  wort.fg  = wort.fg;
+  wort.abv = wort.abv;
+  wort.ebc = wort.ebc;
   wort.ibu = wort.ibu;
   wort.co2 = wort.co2;
   wort.vol = wort.vol;
@@ -110,8 +113,25 @@ mash = function (inflow, activity, equipment, outflow) {
 };
 
 
+
+/* IBU target_position
+
+h = require('homebrewlib')
+r = h.new()
+r.add(h.model.boil)
+r.process[0].vol = 10
+r.process[1].time = 60
+r.process[1].hops[0] = {name: 'a', alpha: 5.0, weight: 10, time: 60, form:'pellets', usage:'forward'}
+r.process[1].hops[1] = {name: 'b', alpha: 9.0, weight: 15, time: 9, form:'pellets', usage:'after hot break'}
+r.brew()
+r.process[1].hops
+
+*/
+
+
 // boil wort
 // supported ingredients: hops, water additions
+// add a property ibu to the hops containing calculated ibus per hop addition
 boil = function (inflow, activity, equipment, outflow) {
 
   // todo: calculate boil-off using boiling power not %
@@ -122,34 +142,41 @@ boil = function (inflow, activity, equipment, outflow) {
   var sg = 1 + (inflow.og - 1) * inflow.vol/post_boil_volume;
 
   // IBUs at end of boil
-  var ibu = 0.0;
-  for (i=0; i<activity.hops.length; i++)
-    ibu += get_ibu (activity.hops[i].alpha, activity.hops[i].weight, activity.hops[i].time + activity.whirlpool,
+  var total_ibu = 0.0;
+  for (var i=0; i<activity.hops.length; i++) {
+    activity.hops[i].ibu = get_ibu (activity.hops[i].alpha, activity.hops[i].weight, activity.hops[i].time + activity.whirlpool,
       post_boil_volume, (inflow.og + sg)/2.0, activity.hops[i].form, activity.hops[i].usage);
+    total_ibu += activity.hops[i].ibu;
+  }
 
   outflow.vol = post_boil_volume - equipment.boil_loss;
   outflow.og  = sg;
   outflow.fg  = sg;
   outflow.abv = inflow.abv;
   outflow.ebc = inflow.ebc + constants.color_adjustment; // CHECK HOW TO TAKE INTO ACCOUNT WORT VOLUME!!
-  outflow.ibu = inflow.ibu + ibu;
+  outflow.ibu = inflow.ibu + total_ibu;
   outflow.co2 = inflow.co2;
 
   // water addition during boil
   add_water(outflow, activity.water);
 
   // sugar additions during boil
-  add_sugar(outflow, activity.sucrose,  "Sucrose");
-  add_sugar(outflow, activity.dextrose, "Dextrose");
-  add_sugar(outflow, activity.dry_malt, "Dry malt extract");
+  add_sugar(outflow, activity.sucrose,  "sucrose");
+  add_sugar(outflow, activity.dextrose, "dextrose");
+  add_sugar(outflow, activity.dry_malt, "dry malt extract");
 
-  // drop possible wort use for carbonation with speise
+  // drop possible wort used for carbonation with speise
   outflow.vol -= activity.speise;
 };
 
 
 
 ferment = function (inflow, activity, equipment, outflow) {
+
+  // sugar additions
+  add_sugar(inflow, activity.sucrose,  "sucrose");
+  add_sugar(inflow, activity.dextrose, "dextrose");
+  add_sugar(inflow, activity.dry_malt, "dry malt extract");
 
   var original_extract = conv.sg2p(inflow.og);
   var final_extract = original_extract;
@@ -173,12 +200,6 @@ ferment = function (inflow, activity, equipment, outflow) {
 
   // water addition
   add_water(outflow, activity.water);
-
-  // sugar additions
-  add_sugar(outflow, activity.sucrose,  "Sucrose");
-  add_sugar(outflow, activity.dextrose, "Dextrose");
-  add_sugar(outflow, activity.dry_malt, "Dry malt extract");
-
 };
 
 
@@ -215,22 +236,29 @@ bottle = function (inflow, activity, equipment, outflow) {
 
 // split flow into two: user-defined volume is moved to new recipe,
 // the rest of the volume is kept in current recipe
-split = function (inflow, activity, outflow) {
+split = function (inflow, activity, equipment, outflow) {
 
- outflow = JSON.parse(JSON.stringify(inflow)); // copy inflow to outflow by value
+  // copy inflow to outflow
+  outflow.og  = inflow.og;
+  outflow.fg  = inflow.fg;
+  outflow.abv = inflow.abv;
+  outflow.ebc = inflow.ebc;
+  outflow.ibu = inflow.ibu;
+  outflow.co2 = inflow.co2;
 
- if (jQuery.isEmptyObject(activity.source_split))
-   outflow.vol = outflow.vol - activity.vol; // source recipe
- else
-   outflow.vol = activity.source_split.vol; // target recipe
+  // calculate volume of flow after split
+  if (activity.target_recipe.process)
+    outflow.vol = inflow.vol - activity.vol; // source recipe
+  else
+    outflow.vol = activity.source_split.vol; // target recipe
 }
 
-// merges two flows: calculates merged properties only for target recipe
-merge = function (inflow, activity, outflow) {
+// merges two flows
+merge = function (inflow, activity, equipment, outflow) {
 
- if (!jQuery.isEmptyObject(activity.source_flow)) {
+ if (activity.merge_flow.vol) { // source flow defined >> merge flows into target recipe
    var wort = inflow;
-   var merge_wort = activity.source_flow;
+   var merge_wort = activity.merge_flow;
 
    outflow.vol = wort.vol + merge_wort.vol;
    outflow.og  = (wort.og * wort.vol + merge_wort.og * merge_wort.vol) / (wort.vol + merge_wort.vol);
@@ -239,6 +267,15 @@ merge = function (inflow, activity, outflow) {
    outflow.ebc = (wort.ebc * wort.vol + merge_wort.ebc * merge_wort.vol) / (wort.vol + merge_wort.vol);
    outflow.ibu = (wort.ibu * wort.vol + merge_wort.ibu * merge_wort.vol) / (wort.vol + merge_wort.vol);
    outflow.co2 = (wort.co2 * wort.vol + merge_wort.co2 * merge_wort.vol) / (wort.vol + merge_wort.vol);
+ }
+ else { // source flow not defined >> empty outflow of source recipe
+   outflow.vol = 0.0;
+   outflow.og  = 1.0;
+   outflow.fg  = 1.0;
+   outflow.abv = 0.0;
+   outflow.ebc = 0.0;
+   outflow.ibu = 0.0;
+   outflow.co2 = 0.0;
  }
 };
 

@@ -1,31 +1,38 @@
-// schemas of all inputs/output/equipment configuration
+// schemas of all inputs/output/equipment configurations
 
 var logic = require("./logic.js");
 
 module.exports = {
 
+//// EQUIPMENT CONFIGURATION WITH DEFAULT VALUES (CAN BE OVERWRITTEN)
+//// TO BE USED WITH FUNCTION set_equipment
+
   // default brew equipment properties
   equipment : {
-    name: "8 liter equipment",
+    name: "8 liter equipment",     // unique name of equipment configuration
 
-    mash_max_volume : 12.0,
-    mash_efficiency_weight : 0.72,
-    mash_false_bottom_volume: 2.0,
-    mash_loss : 1.0,
+    mash_max_volume : 12.0,        // volume of mash tun in l
+    mash_efficiency_weight : 0.72, // average mash efficiency in function of malt weight
+    mash_false_bottom_volume: 2.0, // volume of wort below the faucet in l
+    mash_loss : 1.0,               // loss of wort after lautering in l
 
-    sparge_max_volume : 8.0,
+    sparge_max_volume : 8.0,       // volume of lauter tun in l
 
-    boil_max_volume : 15.0,
-    boil_evaporation_rate : 2.3,
-    boil_loss : 0.5,
+    boil_max_volume : 15.0,        // volume of boil kettle in l
+    boil_evaporation_rate : 2.3,   // evaporation rate of kettle in l/h
+    boil_loss : 0.5,               // loss of wort after boiling in l
 
-    whirlpool_loss : 0.0,
+    whirlpool_loss : 0.0,          // loss of wort in whirlpool
 
-    fermentation_max_volume: 12.0,
-    fermentation_loss: 0.5,
+    fermentation_max_volume: 12.0, // volume of fermentor in l
+    fermentation_loss: 0.5,        // beer lost in fermentor in l
 
-    bottling_loss: 0.0,
+    bottling_loss: 0.0,            // loss of beer during bottling in l
   },
+
+
+//// AUXILIARY DATA STRUCTURES
+//// NOT BE BE USED DIRECTLY BY USER
 
   // structure of liquid flows between brew activities (water, wort, beer)
   flow : {
@@ -38,19 +45,42 @@ module.exports = {
     co2  : 0.0  // CO2 content in g/l
   },
 
+  // structure of malt additions
+  malt : {
+    name   : '',  // unique name of malt variety
+    form   : "grain" | "dry extract" | "liquid extract", // form of delivery  // NOT YET TAKEN INTO ACCOUNT
+    weight : 0.0, // weight in kg
+    ebc    : 0.0  // EBC of malt
+  },
+
+  // structure of hop additions
+  hop : {
+    name : '',       // unique name of hop variety
+    form : 'pellet', // allowed values: 'pellets' | 'cones' | 'cryo'
+    weight : 0.0,    // weight in g
+    alpha : 0.0,     // alpha acid content in %
+    time : 0,        // time of contact with wort
+    usage: ''        // allowed values: 'forward' | 'after hot break' | 'whirlpool'
+  },
+
+  // structure of yeast additions
+  yeast : {
+    name: '',           // unique name of yeast strain
+    type : '',          // possible values: 'liquid' | 'dry' | 'slurry'
+    attenuation : 0.0   // attenation in % (typically between 70-85%)
+  },
+
+
+
+//// ACTIVITIES SUPPORTED BY SUITABLE BREWING FUNCTIONS
+//// TO BE USED WITH FUNCTION add TO CONSTRUCT BREW PORCESS MODEL
+
   // configuration of mash step
   mash : {
     name  : "Mash",     // name of activity
     run   : logic.mash, // name of function implementing activity
     malts : [],         // list of malts to be mashed, see internal model below
     water : 0.0,        // sparge water in l
-  },
-
-  // structure of malt additions
-  malt : {
-    name   : '',  // unique name of malt variety
-    weight : 0.0, // weight in kg
-    ebc    : 0.0  // EBC of malt
   },
 
   // configuration of boil step
@@ -65,16 +95,6 @@ module.exports = {
     dextrose  : 0.0, // dextrose addition in kg
     dry_malt  : 0.0, // dry malt addition in kg
     speise    : 0.0, // volume of speise used for priming
-  },
-
-  // structure of hop additions
-  hop : {
-    name : '',       // unique name of hop variety
-    form : 'pellet', // allowed values: 'pellet' | 'cone' | 'cryo'
-    weight : 0.0,    // weight in g
-    alpha : 0.0,     // alpha acid content in %
-    time : 0,        // time of contact with wort
-    usage: ''        // allowed values: 'forward' | 'after hot break' | 'whirlpool'
   },
 
   // configuration of fermentation step
@@ -104,6 +124,10 @@ module.exports = {
     speise   : 0.0, // speise (wort) addition for priming in l
   },
 
+
+//// FLOW MANAGEMENT ACTIVITIES: SPLIT AND MERGE
+//// AUTOMATICALLY ADDED TO MODEL BY split/merge FUNCTIONS
+
   // configuration of wort split activities
   split : {
     name : "Split",
@@ -117,8 +141,7 @@ module.exports = {
   merge : {
     name : "Merge",
     run  : logic.merge,
-    source_flow   : {}, // source flow to be merged
-    source_recipe : {}  // source recipe containing source flow
+    merge_flow : {}, // source flow to be merged
   },
 
 };
