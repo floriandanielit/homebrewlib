@@ -254,6 +254,32 @@ r.process
 e.process
 
 
+
+// single recipe: DIPA
+h=require('homebrewlib')
+r=h.new()
+r.add(h.model.mash).add(h.model.boil).add(h.model.ferment).add(h.model.bottle)
+
+r.process[0].vol=8
+r.process[1].water=7
+r.process[1].malts[0] = {name:'Pilsner', form:'grain', weight:2.2, ebc:3}
+r.process[1].malts[1] = {name:'CaraPilsner', form:'grain', weight:0.22, ebc:3}
+
+r.process[3].time=60
+r.process[3].whirlpool=15
+r.process[3].hops[0]={name:'Columbus', form:'pellets', weight:35.0, alpha:15, time:70, usage:'forward'}
+r.process[3].hops[1]={name:'Simcoe', form:'pellets', weight:16.0, alpha:13.1, time:30, usage:'after hot break'}
+r.process[3].hops[2]={name:'Centennial', form:'pellets', weight:10.0, alpha:10.2, time:0, usage:'whirlpool'}
+r.process[3].dextrose=0.10
+
+r.process[5].yeast={name:'Safale US-05', type:'dry', attenuation: 88.0}
+r.process[5].max_temp=20
+
+r.process[7].dextrose=6
+
+r.brew()
+r.process
+
 */
 
   // brews all connected recipies starting from given recipe
@@ -264,7 +290,7 @@ e.process
     this.init(recipies);
 
     // brew all recipes until all activites of all recipes are completed
-    // (a recipe may not be brewable if there is a merge with an inflow that is 
+    // (a recipe may not be brewable if there is a merge with an inflow that is
     // not yet ready for futher processing: status = 'tbd')
     while (recipies.length > 0)
       for (var i=0; i<recipies.length; i++)

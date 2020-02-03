@@ -117,7 +117,8 @@ module.exports = {
   bottle : {
     name : "Bottle",
     run  : logic.bottle,
-    loss  : 0.0,    // loss of beer during bottling
+    water    : 0.0, // water added before bottling
+    loss     : 0.0, // loss of beer during bottling
     sucrose  : 0.0, // sugar addition for priming in g/l
     dextrose : 0.0, // dextrose addition for priming in g/l
     dry_malt : 0.0, // sugar additions for priming in g/l

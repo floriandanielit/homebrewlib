@@ -44,7 +44,7 @@ add_water = function (wort, water_addition) {
 
 
 // sugar additions prior to priming and final fermentation
-add_sugar = function (wort, quantity, type) {
+add_sugar = function (wort, quantity, type, add_to_fg=0) {
 
   // pure sucrose has a correction factor of 1 (it's the reference)
   var correction = 1.0;
@@ -66,7 +66,7 @@ add_sugar = function (wort, quantity, type) {
   var sg = conv.p2sg(extract_plato);
 
   wort.og  = sg;
-  wort.fg  = wort.fg;
+  wort.fg  = (add_to_fg) ? sg : wort.fg;
   wort.abv = wort.abv;
   wort.ebc = wort.ebc;
   wort.ibu = wort.ibu;
@@ -161,9 +161,9 @@ boil = function (inflow, activity, equipment, outflow) {
   add_water(outflow, activity.water);
 
   // sugar additions during boil
-  add_sugar(outflow, activity.sucrose,  "sucrose");
-  add_sugar(outflow, activity.dextrose, "dextrose");
-  add_sugar(outflow, activity.dry_malt, "dry malt extract");
+  add_sugar(outflow, activity.sucrose,  "sucrose", 1);
+  add_sugar(outflow, activity.dextrose, "dextrose", 1);
+  add_sugar(outflow, activity.dry_malt, "dry malt extract", 1);
 
   // drop possible wort used for carbonation with speise
   outflow.vol -= activity.speise;
@@ -231,6 +231,9 @@ bottle = function (inflow, activity, equipment, outflow) {
   outflow.ebc = inflow.ebc;
   outflow.ibu = inflow.ibu;
   outflow.co2 = inflow.co2 + prime_co2;
+
+  // water addition during boil
+  add_water(outflow, activity.water);
 };
 
 
